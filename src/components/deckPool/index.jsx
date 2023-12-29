@@ -1,6 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import Card from "@/components/card";
 import useDeck from "./useDeck";
+import ModalDiscardPool from "./modalDiscardPool";
 
 const DeckPool = () => {
   const { deckTitle, discardTitle, deckPool, discardPool } = useDeck();
@@ -27,6 +28,7 @@ const DeckPool = () => {
               return <Card key={v + k} v={v} size="xs" absolute />;
             })}
           </AnimatePresence>
+          <ModalDiscardPool discardPool={discardPool} />
         </div>
         <div className="text-green-300 uppercase text-center pt-1">
           <div className="text-xs font-bold">{discardPool.length}</div>

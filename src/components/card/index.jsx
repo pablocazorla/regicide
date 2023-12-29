@@ -25,6 +25,7 @@ const Card = ({
   disabled,
   onClick,
   highlighted,
+  noLayout,
 }) => {
   const { num, suit, isRed, isFigure, attackPower } = useMemo(() => {
     const arr = v.split("_");
@@ -61,7 +62,7 @@ const Card = ({
 
   return (
     <motion.div
-      layoutId={v}
+      layoutId={noLayout ? null : v}
       className={clsx("transition-colors", {
         "w-10 h-16 rounded grid place-content-center ": size === "xs",
         "w-20 h-32 rounded grid place-content-center border": size === "sm",

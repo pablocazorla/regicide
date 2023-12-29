@@ -33,7 +33,7 @@ const Note = ({ note, className }) => {
                 <div className="pt-2">
                   <button
                     className={clsx(
-                      "flex items-center gap-2 bg-amber-700 py-2 px-6 text-white font-bold rounded-full",
+                      "flex items-center gap-2 bg-amber-700 py-3 px-8 text-white font-bold rounded-full",
                       {
                         "opacity-30": disableButton || note?.disabled,
                       }
