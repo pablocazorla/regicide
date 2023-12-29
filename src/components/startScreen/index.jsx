@@ -20,7 +20,7 @@ const StartScreen = ({ setAppStatus, setVisibleAbout }) => {
           <h1 className="font-bold text-5xl mb-1">Regicide</h1>
           <div className="mb-3">
             <span className="uppercase font-bold">Solo</span>
-            <span className="pl-2 text-[9px]">v.1.0</span>
+            <span className="pl-2 text-[9px]">v.1.1</span>
           </div>
           <hr className="opacity-30 mb-3" />
           <p className="mb-3">
