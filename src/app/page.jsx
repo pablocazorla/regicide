@@ -14,13 +14,22 @@ import AboutModal from "@/components/about";
 */
 
 export default function Home() {
-  const { appStatus, setAppStatus, visibleAbout, setVisibleAbout } = useApp();
+  const {
+    appStatus,
+    setAppStatus,
+    visibleAbout,
+    setVisibleAbout,
+    isFullScreen,
+    toggleFullScreen,
+  } = useApp();
 
   const screenList = [
     <StartScreen
       key={0}
       setAppStatus={setAppStatus}
       setVisibleAbout={setVisibleAbout}
+      isFullScreen={isFullScreen}
+      toggleFullScreen={toggleFullScreen}
     />,
     <Table
       key={1}

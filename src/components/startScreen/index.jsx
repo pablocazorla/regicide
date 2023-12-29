@@ -3,9 +3,14 @@ import Icon from "../icon";
 import LangModal from "./lang";
 import useStartScreen from "./useStartScreen";
 
-const version = 1.2;
+const version = 1.3;
 
-const StartScreen = ({ setAppStatus, setVisibleAbout }) => {
+const StartScreen = ({
+  setAppStatus,
+  setVisibleAbout,
+  isFullScreen,
+  toggleFullScreen,
+}) => {
   const {
     savedGame,
     showLangModal,
@@ -36,14 +41,31 @@ const StartScreen = ({ setAppStatus, setVisibleAbout }) => {
           </p>
 
           <button
-            className="uppercase font-bold text-[10px] bg-black/40 py-1 px-5 rounded-full"
+            className="uppercase font-bold text-[10px] bg-black/40 py-1 px-5 rounded-full mb-4"
             onClick={() => {
               setVisibleAbout(true);
             }}
           >
             Leer más
           </button>
-          <div className="flex flex-col items-stretch gap-3 py-9">
+          <hr className="opacity-30" />
+          <div className="flex flex-col items-stretch gap-3 py-3">
+            <div className="py-3">
+              <button
+                className="border border-dotted border-emerald-600 bg-black/10 py-2 px-6  rounded-lg flex items-center gap-1 mx-auto"
+                onClick={toggleFullScreen}
+              >
+                <div className="text-2xl leading-none">
+                  <Icon type="fullscreen" />
+                </div>
+                <div className="text-xs leading-none">
+                  {isFullScreen
+                    ? "Salir de pantalla completa"
+                    : "Ver en pantalla completa"}
+                </div>
+              </button>
+            </div>
+
             {savedGame ? (
               <>
                 <button
