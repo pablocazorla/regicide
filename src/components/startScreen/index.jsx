@@ -18,7 +18,10 @@ const StartScreen = ({ setAppStatus, setVisibleAbout }) => {
       <main className="container grid place-content-center">
         <div className="text-center px-7">
           <h1 className="font-bold text-5xl mb-1">Regicide</h1>
-          <div className="uppercase font-bold mb-3">Solo</div>
+          <div className="mb-3">
+            <span className="uppercase font-bold">Solo</span>
+            <span className="pl-2 text-[9px]">v.1.0</span>
+          </div>
           <hr className="opacity-30 mb-3" />
           <p className="mb-3">
             Aplicación para que puedas probar el juego Regicide en modo
