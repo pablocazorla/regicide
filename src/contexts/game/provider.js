@@ -44,6 +44,7 @@ const GameContextProvider = ({ children }) => {
       setEnemyList(savedGame.enemyList);
       setEnemyLife(savedGame.enemyLife);
       setHandPool(savedGame.handPool);
+      setJokers(savedGame.jokers);
       setStatus(statusTypes.PLAY_CARDS);
     } else {
       const deckShuffled = deckUtils.shuffle(DECK);
@@ -79,6 +80,7 @@ const GameContextProvider = ({ children }) => {
       enemyList,
       deckPool,
       discardPool,
+      jokers,
     });
   }, [
     saveGame,
@@ -88,6 +90,7 @@ const GameContextProvider = ({ children }) => {
     enemyList,
     deckPool,
     discardPool,
+    jokers,
   ]);
 
   const moveCardsBetweenPools = useCallback((v_array, origin, destiny) => {

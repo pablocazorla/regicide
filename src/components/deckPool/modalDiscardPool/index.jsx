@@ -2,6 +2,7 @@ import Icon from "@/components/icon";
 import Modal from "@/components/modal";
 import { useState } from "react";
 import Card from "@/components/card";
+import I18Ntext from "@/i18n";
 
 const ModalDiscardPool = ({ discardPool }) => {
   const [visible, setVisible] = useState(false);
@@ -17,7 +18,9 @@ const ModalDiscardPool = ({ discardPool }) => {
       {/* <div className="">ModalDiscardPool</div> */}
       <Modal visible={visible}>
         <div className="flex items-center p-2 shadow-xl">
-          <div className="grow text-center font-bold">Descarte</div>
+          <div className="grow text-center font-bold">
+            {`${I18Ntext("discard")} (${discardPool.length})`}
+          </div>
           <button
             className="text-xl px-1"
             onClick={() => {
