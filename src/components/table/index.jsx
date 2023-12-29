@@ -11,19 +11,21 @@ import GameContextProvider from "@/contexts/game/provider";
 const Table = () => {
   return (
     <GameContextProvider>
-      <Header />
-      <main className="container p-7 h-screen">
-        <div className="flex mb-8 gap-2 items-start">
-          <div className="grow">
-            <EnemyPool />
+      <main className="container h-screen overflow-hidden">
+        <Header />
+        <div className="p-7">
+          <div className="flex mb-8 gap-2 items-start">
+            <div className="grow">
+              <EnemyPool />
+            </div>
+            <div>
+              <DeckPool />
+            </div>
           </div>
-          <div>
-            <DeckPool />
-          </div>
+          <TablePool />
+          <AttackProcess />
+          <HandPool />
         </div>
-        <TablePool />
-        <AttackProcess />
-        <HandPool />
       </main>
     </GameContextProvider>
   );
