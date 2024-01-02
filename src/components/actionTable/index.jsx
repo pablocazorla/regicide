@@ -6,14 +6,14 @@ import I18Ntext from "@/i18n";
 
 const ActionTable = () => {
   const {
-    tablePool,
+    isCardsInTable,
     actionTableList,
     totalAttack,
     attackBase,
     onClickAttackButton,
   } = useTableAction();
 
-  return tablePool.length ? (
+  return isCardsInTable ? (
     <>
       <div className="text-sm">
         {actionTableList.map((act, k) => {

@@ -17,15 +17,16 @@ const Table = () => {
         <div className="p-7">
           <div className="flex mb-8 gap-2 items-start">
             <div className="grow">
-              <EnemyPool />
+              {" "}
+              <EnemyPool />{" "}
             </div>
             <div>
               <DeckPool />
-              <Jokers />
+              {/*<Jokers /> */}
             </div>
           </div>
           <TablePool />
-          <AttackProcess />
+          {/* <AttackProcess /> */}
           <HandPool />
         </div>
       </main>

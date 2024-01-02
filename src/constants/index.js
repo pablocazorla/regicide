@@ -73,20 +73,6 @@ export const enemyValues = {
   },
 };
 
-export const createENEMIES = () => {
-  const jacks = SUITS.map((suit) => {
-    return `J_${suit.key}`;
-  });
-  const queens = SUITS.map((suit) => {
-    return `Q_${suit.key}`;
-  });
-  const kings = SUITS.map((suit) => {
-    return `K_${suit.key}`;
-  });
-
-  return [...shuffle(kings), ...shuffle(queens), ...shuffle(jacks)];
-};
-
 export const langOptions = [
   {
     text: "English",

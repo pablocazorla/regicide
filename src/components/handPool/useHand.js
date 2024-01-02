@@ -1,10 +1,19 @@
-import { useCallback, useContext, useMemo } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import GameContext from "@/contexts/game/context";
 import { flatListNum } from "@/utils";
 import { statusTypes, enemyValues } from "@/constants";
 import { getValues } from "@/utils";
 
 const useHand = () => {
+  const { Game, update } = useContext(GameContext);
+
+  const [handPool, setHandPool] = useState([]);
+
+  useEffect(() => {
+    setHandPool(Game.handPool);
+  }, [Game, update.handPool]);
+
+  /*
   const {
     status,
     handPool,
@@ -141,12 +150,14 @@ const useHand = () => {
     return null;
   }, [status, tablePool]);
 
+  */
+
   return {
-    note,
+    note: null,
     handPool,
-    payDamagePool,
-    handDisable,
-    onClickHandCard,
+    payDamagePool: () => {},
+    handDisable: {},
+    onClickHandCard: () => {},
   };
 };
 

@@ -1,10 +1,8 @@
-import useStore from "@/store/useStore";
+import { setOptions, getOptions } from "@/store";
 import { useCallback, useState } from "react";
 import { defaultLanguage } from "@/constants";
 
-const useLang = (setVisible) => {
-  const { setOptions, getOptions } = useStore();
-
+const useLang = () => {
   const [lang, setLang] = useState(() => {
     const options = getOptions();
     if (options && options.lang) {
@@ -16,7 +14,7 @@ const useLang = (setVisible) => {
   const onClick = useCallback(() => {
     setOptions({ lang });
     window.location.reload();
-  }, [setOptions, lang]);
+  }, [lang]);
 
   return { lang, setLang, onClick };
 };

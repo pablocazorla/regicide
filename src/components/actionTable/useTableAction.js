@@ -1,10 +1,17 @@
-import { useContext, useMemo } from "react";
+import { useContext, useMemo, useEffect, useState } from "react";
 import GameContext from "@/contexts/game/context";
 
 const useTableAction = () => {
-  const { tablePool, listActions, onAttack } = useContext(GameContext);
+  const { Game, update } = useContext(GameContext);
+
+  const [isCardsInTable, setIsCardsInTable] = useState(false);
+
+  useEffect(() => {
+    setIsCardsInTable(Game.tablePool.length > 0);
+  }, [Game, update]);
 
   const { actionTableList, totalAttack, attackBase } = useMemo(() => {
+    /*
     if (listActions) {
       const { powers, attackBase, totalAttack } = listActions;
 
@@ -35,16 +42,17 @@ const useTableAction = () => {
 
       return { actionTableList, totalAttack, attackBase };
     }
+    */
 
     return { actionTableList: [], totalAttack: 0, attackBase: 0 };
-  }, [listActions]);
+  }, []);
 
   return {
-    tablePool,
+    isCardsInTable,
     actionTableList,
     totalAttack,
     attackBase,
-    onClickAttackButton: onAttack,
+    onClickAttackButton: () => {},
   };
 };
 

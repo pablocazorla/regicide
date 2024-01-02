@@ -1,9 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
-import useStore from "@/store/useStore";
+import { getSavedGame, clearGame, getOptions } from "@/store";
 
 const useStartScreen = (setAppStatus) => {
-  const { getSavedGame, clearGame, getOptions } = useStore();
-
   const [savedGame, setSavedGame] = useState(null);
 
   const [showLangModal, setShowLangModal] = useState(false);
@@ -12,16 +10,14 @@ const useStartScreen = (setAppStatus) => {
 
   useEffect(() => {
     setSavedGame(getSavedGame());
-  }, [getSavedGame]);
-
-  useEffect(() => {
+    //
     const options = getOptions();
     if (options && options.lang) {
       setShowLangModal(false);
     } else {
       setShowLangModal(true);
     }
-  }, [getOptions]);
+  }, []);
 
   const onClickContinueGame = useCallback(() => {
     setAppStatus(1);
@@ -33,7 +29,7 @@ const useStartScreen = (setAppStatus) => {
     setTimeout(() => {
       setAppStatus(1);
     }, 500);
-  }, [clearGame, setAppStatus]);
+  }, [setAppStatus]);
 
   return {
     showLangModal,
