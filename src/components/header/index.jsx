@@ -6,7 +6,6 @@ const Header = () => {
 
   const [c, setC] = useState(0);
 
-  console.log("Game", Game);
   return (
     <header className="bg-teal-950 relative z-20">
       <div className="h-12">header {c}</div>

@@ -1,3 +1,10 @@
+export const statusTypes = {
+  RESETTING: "RESETTING",
+  PLAY_CARDS: "PLAY_CARDS",
+  SEND_CARDS_TO_ATTACK: "SEND_CARDS_TO_ATTACK",
+  CARDS_TO_ATTACK: "CARDS_TO_ATTACK",
+};
+
 export const SUITS = [
   {
     name: "hearts", // corazones
@@ -28,3 +35,23 @@ export const baseDeck = (() => {
 
   return list;
 })();
+
+export const enemyValues = {
+  J: {
+    attack: 10,
+    life: 20,
+  },
+  Q: {
+    attack: 15,
+    life: 30,
+  },
+  K: {
+    attack: 20,
+    life: 40,
+  },
+};
+
+export const playCardsFromHandNote = {
+  icon: "idea",
+  text: "playCardsFromHand",
+};

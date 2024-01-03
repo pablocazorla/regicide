@@ -1,19 +1,23 @@
-import { useContext, useMemo, useEffect, useState } from "react";
+import { useContext, useMemo, useEffect, useState, useCallback } from "react";
 import GameContext from "@/contexts/game/context";
 
 const useTableAction = () => {
   const { Game, update } = useContext(GameContext);
 
   const [isCardsInTable, setIsCardsInTable] = useState(false);
+  const [actionsTable, setActionsTable] = useState({
+    actionTableList: [],
+    totalAttack: 0,
+    attackBase: 0,
+  });
 
   useEffect(() => {
     setIsCardsInTable(Game.tablePool.length > 0);
-  }, [Game, update]);
+  }, [Game, update.tablePool]);
 
-  const { actionTableList, totalAttack, attackBase } = useMemo(() => {
-    /*
-    if (listActions) {
-      const { powers, attackBase, totalAttack } = listActions;
+  useEffect(() => {
+    if (Game.tableAttack) {
+      const { powers, attackBase, totalAttack } = Game.tableAttack;
 
       const actionTableList = [
         {
@@ -40,19 +44,20 @@ const useTableAction = () => {
         return a.enabled;
       });
 
-      return { actionTableList, totalAttack, attackBase };
+      setActionsTable({ actionTableList, totalAttack, attackBase });
+    } else {
+      setActionsTable({ actionTableList: [], totalAttack: 0, attackBase: 0 });
     }
-    */
+  }, [Game, update.tableAttack]);
 
-    return { actionTableList: [], totalAttack: 0, attackBase: 0 };
-  }, []);
+  const onClickAttackButton = useCallback(() => {
+    Game.onClickAttackButton();
+  }, [Game]);
 
   return {
+    ...actionsTable,
     isCardsInTable,
-    actionTableList,
-    totalAttack,
-    attackBase,
-    onClickAttackButton: () => {},
+    onClickAttackButton,
   };
 };
 

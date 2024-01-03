@@ -1,4 +1,4 @@
-import { SUITS } from "./constants";
+import { SUITS, enemyValues } from "./constants";
 
 export const shuffle = (list) => {
   return [...list].sort(() => {
@@ -30,4 +30,32 @@ export const createENEMIES = () => {
 
 export const afterPause = (duration, callback) => {
   setTimeout(callback, duration);
+};
+
+export const flatListNum = (list) => {
+  return list.map((v) => {
+    const a = v.split("_")[0];
+    const n = "JQK".indexOf(a) >= 0 ? enemyValues[a].attack : parseInt(a, 10);
+    return n;
+  });
+};
+
+export const disabledAllCardsInHand = (handPool) => {
+  return handPool.reduce((obj, v) => {
+    obj[v] = true;
+    return obj;
+  }, {});
+};
+
+export const getValues = (v, numbers) => {
+  if (!v) {
+    return [null, null];
+  }
+  const [a, b] = v.split("_");
+
+  if (!numbers) {
+    return [a, b];
+  }
+  const n = "JQK".indexOf(a) >= 0 ? enemyValues[a].attack : parseInt(a, 10);
+  return [n, b];
 };

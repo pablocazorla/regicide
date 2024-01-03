@@ -13,6 +13,12 @@ const GameContextProvider = ({ children }) => {
     enemyList: 0,
     enemyLife: 0,
     jokers: 0,
+    //
+    handDisabled: 0,
+    tableAttack: 0,
+    payDamagePool: 0,
+    //
+    note: 0,
   });
 
   const onUpdate = useCallback((list) => {

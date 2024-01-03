@@ -7,7 +7,8 @@ import HandPool from "@/components/handPool";
 import Header from "@/components/header";
 import AttackProcess from "../attackProcess";
 import GameContextProvider from "@/contexts/game/provider";
-import Jokers from "../jokers";
+import Jokers from "@/components/jokers";
+import Note from "@/components/note";
 
 const Table = () => {
   return (
@@ -27,6 +28,7 @@ const Table = () => {
           </div>
           <TablePool />
           {/* <AttackProcess /> */}
+          <Note className="mb-3" />
           <HandPool />
         </div>
       </main>

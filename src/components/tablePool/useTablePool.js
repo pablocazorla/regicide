@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback } from "react";
 import GameContext from "@/contexts/game/context";
 
 const useTablePool = () => {
@@ -10,7 +10,14 @@ const useTablePool = () => {
     setTablePool(Game.tablePool);
   }, [Game, update.tablePool]);
 
-  return { tablePool, onClickTableCard: (v) => {} };
+  const onClickTableCard = useCallback(
+    (card) => {
+      Game.onClickTableCard(card);
+    },
+    [Game]
+  );
+
+  return { tablePool, onClickTableCard };
 };
 
 export default useTablePool;

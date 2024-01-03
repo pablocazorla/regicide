@@ -3,13 +3,22 @@ import Icon from "../icon";
 import { useState } from "react";
 import clsx from "clsx";
 import I18Ntext from "@/i18n";
+import useNote from "./useNote";
 
-const Note = ({ note, className }) => {
-  const [disableButton, setDisableButton] = useState(false);
+const Note = ({ className }) => {
+  const {
+    icon,
+    text,
+    values,
+    disableButton,
+    textButton,
+    action,
+    setDisableButton,
+  } = useNote();
 
   return (
     <AnimatePresence>
-      {note ? (
+      {text ? (
         <motion.div
           initial={{ opacity: 0, scaleY: 0 }}
           animate={{ opacity: 1, scaleY: 1 }}
@@ -21,31 +30,31 @@ const Note = ({ note, className }) => {
         >
           <div className="flex gap-4">
             <div className="text-4xl pt-1">
-              <Icon type={note.icon} />
+              <Icon type={icon} />
             </div>
             <div className="grow text-[14px] font-medium pt-2 leading-5">
               <div
                 dangerouslySetInnerHTML={{
-                  __html: I18Ntext(note?.text, note?.values || []),
+                  __html: I18Ntext(text, values),
                 }}
               />
-              {note?.action ? (
+              {action ? (
                 <div className="pt-2">
                   <button
                     className={clsx(
                       "flex items-center gap-2 bg-amber-700 py-3 px-8 text-white font-bold rounded-full",
                       {
-                        "opacity-30": disableButton || note?.disabled,
+                        "opacity-30": disableButton,
                       }
                     )}
                     onClick={() => {
                       setDisableButton(true);
-                      note.action();
+                      action();
                     }}
-                    disabled={disableButton || note?.disabled}
+                    disabled={disableButton}
                   >
                     {disableButton && <Icon type="loading" />}
-                    {I18Ntext(note?.textButton || "btn.continue")}
+                    {I18Ntext(textButton)}
                   </button>
                 </div>
               ) : null}
