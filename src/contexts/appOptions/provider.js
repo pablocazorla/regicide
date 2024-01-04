@@ -1,7 +1,7 @@
 import { getOptions, setOptions } from "@/store";
 import { defaultLanguage } from "@/constants";
 import AppOptionContext from "./context";
-import { useCallback, useMemo, useState } from "react";
+import { useMemo } from "react";
 
 const AppOptionContextProvider = ({ children }) => {
   const lang = useMemo(() => {
@@ -11,8 +11,6 @@ const AppOptionContextProvider = ({ children }) => {
     }
     return defaultLanguage;
   }, []);
-
-  console.log("lang", lang);
 
   return (
     <AppOptionContext.Provider
