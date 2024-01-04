@@ -12,7 +12,7 @@ import Note from "@/components/note";
 const TableScreen = () => {
   return (
     <GameContextProvider>
-      <main className="container h-screen overflow-hidden">
+      <main className="container h-screen overflow-hidden animate-fadein">
         <Header />
         <div className="p-7">
           <div className="flex mb-8 gap-2 items-start">

@@ -1,4 +1,5 @@
 "use client";
+import I18Ntext from "@/i18n";
 import Icon from "../icon";
 import LangModal from "./lang";
 import useStartScreen from "./useStartScreen";
@@ -22,22 +23,21 @@ const StartScreen = ({
 
   return (
     <>
-      <main className="container grid place-content-center">
+      <main className="container grid place-content-center animate-fadein">
         <div className="text-center px-7">
           <h1 className="font-bold text-5xl mb-1">Regicide</h1>
           <div className="mb-3">
-            <span className="uppercase font-bold">Solo</span>
+            <span className="uppercase font-bold">
+              <I18Ntext str="solo.title" />
+            </span>
             <span className="pl-2 text-[9px]">{`v.${version}`}</span>
           </div>
           <hr className="opacity-30 mb-3" />
           <p className="mb-3">
-            Aplicación para que puedas probar el juego Regicide en modo
-            solitario.
+            <I18Ntext str="startScreen.text.1" />
           </p>
           <p className="text-xs mb-1">
-            Está aplicación es experimental, y sin ánimo de lucro. Si te gusta
-            el juego, no dudes en adquirir el juego de mesa (podrás jugar con
-            otras personas en modo cooperativo).
+            <I18Ntext str="startScreen.text.2" />
           </p>
 
           <button
@@ -46,7 +46,7 @@ const StartScreen = ({
               setVisibleAbout(true);
             }}
           >
-            Leer más
+            <I18Ntext str="startScreen.readMore" />
           </button>
           <hr className="opacity-30" />
           <button
@@ -67,9 +67,11 @@ const StartScreen = ({
                   <Icon type="fullscreen" />
                 </div>
                 <div className="text-xs leading-none">
-                  {isFullScreen
-                    ? "Salir de pantalla completa"
-                    : "Ver en pantalla completa"}
+                  <I18Ntext
+                    str={
+                      isFullScreen ? "setFullScreen.Out" : "setFullScreen.In"
+                    }
+                  />
                 </div>
               </button>
             </div>
@@ -80,9 +82,11 @@ const StartScreen = ({
                   className="bg-emerald-500 p-3 rounded-full font-bold shadow-lg"
                   onClick={onClickContinueGame}
                 >
-                  Continuar partida
+                  <I18Ntext str="btn.continueGame" />
                 </button>
-                <div className="">o</div>
+                <div className="">
+                  <I18Ntext str="continueGame.or.newGame" />
+                </div>
               </>
             ) : null}
             <button
@@ -90,7 +94,7 @@ const StartScreen = ({
               onClick={onClickNewGame}
             >
               {loadingForNewGame && <Icon type="loading" />}
-              Nueva partida
+              <I18Ntext str="btn.newGame" />
             </button>
             <div className="pt-4">
               <a
@@ -103,7 +107,7 @@ const StartScreen = ({
                   <Icon type="link" />
                 </span>
                 <span className="text-xs">
-                  Aprender a jugar (nueva página).
+                  <I18Ntext str="btn.learnToPlay" />
                 </span>
               </a>
             </div>

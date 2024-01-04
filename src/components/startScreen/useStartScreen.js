@@ -20,14 +20,14 @@ const useStartScreen = (setAppStatus) => {
   }, []);
 
   const onClickContinueGame = useCallback(() => {
-    setAppStatus(1);
+    setAppStatus((v) => v + 1);
   }, [setAppStatus]);
 
   const onClickNewGame = useCallback(() => {
     setLoadingForNewGame(true);
     clearGame();
     setTimeout(() => {
-      setAppStatus(1);
+      setAppStatus((v) => v + 1);
     }, 500);
   }, [setAppStatus]);
 

@@ -25,15 +25,16 @@ export default function Home() {
   } = useApp();
 
   const screenList = [
+    null,
     <StartScreen
-      key={0}
+      key={1}
       setAppStatus={setAppStatus}
       setVisibleAbout={setVisibleAbout}
       isFullScreen={isFullScreen}
       toggleFullScreen={toggleFullScreen}
     />,
     <TableScreen
-      key={1}
+      key={2}
       setAppStatus={setAppStatus}
       setVisibleAbout={setVisibleAbout}
     />,

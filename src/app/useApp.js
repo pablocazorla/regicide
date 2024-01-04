@@ -7,6 +7,8 @@ const useApp = () => {
   const [isFullScreen, setIsFullScreen] = useState(false);
 
   useEffect(() => {
+    setAppStatus(1);
+    //
     const detectFullscreen = () => {
       if (document.fullscreenElement) {
         setIsFullScreen(true);

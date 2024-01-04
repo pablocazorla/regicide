@@ -30,5 +30,15 @@
   "useJoker.explanation": "<strong>Descarta tu mano</strong>,<br />y luego roba hasta <strong>8 cartas</strong>.",
   "useJoker.btn": "Usar",
   "card.attack": "Ataque",
-  "card.life": "Vida"
+  "card.life": "Vida",
+  "solo.title": "Solo",
+  "startScreen.text.1": "Aplicación para que puedas probar el juego Regicide en modo solitario.",
+  "startScreen.text.2": "Está aplicación es experimental, y sin ánimo de lucro. Si te gusta el juego, no dudes en adquirir el juego de mesa (podrás jugar con otras personas en modo cooperativo).",
+  "startScreen.readMore": "Leer más",
+  "setFullScreen.In": "Ver en pantalla completa",
+  "setFullScreen.Out": "Salir de pantalla completa",
+  "btn.continueGame": "Continuar partida",
+  "btn.newGame": "Nueva partida",
+  "continueGame.or.newGame": "o",
+  "btn.learnToPlay": "Aprender a jugar (nueva página)."
 }
