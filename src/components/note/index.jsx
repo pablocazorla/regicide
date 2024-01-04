@@ -10,6 +10,7 @@ const Note = ({ className }) => {
     icon,
     text,
     values,
+    loading,
     disableButton,
     textButton,
     action,
@@ -53,7 +54,7 @@ const Note = ({ className }) => {
                     }}
                     disabled={disableButton}
                   >
-                    {disableButton && <Icon type="loading" />}
+                    {loading && <Icon type="loading" />}
                     {I18Ntext(textButton)}
                   </button>
                 </div>

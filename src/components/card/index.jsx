@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Icon from "../icon";
 import { useMemo } from "react";
 import clsx from "clsx";
+import LifeIndicator from "./lifeIndicator";
 
 /*
 size
@@ -153,13 +154,7 @@ const Card = ({
                   </div>
                   <div className="uppercase text-[9px] font-bold">Ataque</div>
                 </div>
-                <div className="flex items-center bg-red-800 justify-center rounded-full gap-1 border-2 border-white shadow-md">
-                  <div className="font-bold text-lg">{life}</div>
-                  <div className="">
-                    <Icon type="life" />
-                  </div>
-                  <div className="uppercase text-[9px] font-bold">Vida</div>
-                </div>
+                <LifeIndicator life={life} />
               </div>
             </div>
           ) : null}

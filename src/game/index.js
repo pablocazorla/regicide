@@ -31,6 +31,7 @@ class GameClass {
     this.payDamagePool = [];
     this.isPayingDamage = false;
     this.paymentTotal = 0;
+    this.payDamageButtonDisabled = true;
     //
     this.enemyLife = 20;
     //
@@ -129,7 +130,13 @@ class GameClass {
 
       this.setHandDisabled();
 
-      this.onUpdate(["payDamagePool", "handDisabled"]);
+      this.payDamageButtonDisabled = this.paymentTotal < this.enemyAttackTotal;
+
+      this.onUpdate([
+        "payDamagePool",
+        "payDamageButtonDisabled",
+        "handDisabled",
+      ]);
     }
   }
   onClickTableCard(card) {
@@ -469,6 +476,8 @@ class GameClass {
         } else {
           this.isPayingDamage = true;
           this.payDamagePool = [];
+          this.paymentTotal = 0;
+          this.payDamageButtonDisabled = true;
           this.setHandDisabled();
 
           this.note = {
@@ -476,16 +485,12 @@ class GameClass {
             text: "payDamage.2",
             textButton: "btn.payDamage",
             values: [this.enemyAttackTotal],
-            // disabled: paymentTotal < enemyAttackTotal,
+            forPayDamageButton: true,
             action: () => {
               this.onPayDamage();
-              afterPause(800, () => {
-                this.attackStepIndex += 1;
-                this.evaluateStepAttack();
-              });
             },
           };
-          this.onUpdate(["note", "handDisabled"]);
+          this.onUpdate(["note", "payDamageButtonDisabled", "handDisabled"]);
         }
 
         break;
@@ -500,8 +505,8 @@ class GameClass {
 
         afterPause(400, () => {
           const currentEnemy = this.enemyPool[this.enemyPool.length - 1];
-          const [enemyNum] = getValues(currentEnemy, true);
-          this.enemyLife = enemyNum;
+          /* const [enemyNum] = getValues(currentEnemy, true);
+          this.enemyLife = enemyNum; */
 
           if (this.enemyLife <= 0) {
             if (this.enemyLife === 0) {
@@ -520,8 +525,8 @@ class GameClass {
             }
             if (this.enemyPool.length) {
               const nextEnemy = this.enemyPool[this.enemyPool.length - 1];
-              const [nextEnemyNum] = getValues(nextEnemy, true);
-              this.enemyLife = nextEnemyNum;
+              const [nextEnemyNum] = getValues(nextEnemy);
+              this.enemyLife = enemyValues[nextEnemyNum].life;
             }
 
             this.onUpdate([
@@ -557,10 +562,9 @@ class GameClass {
       default:
       //
     }
-
-    console.log("this.attackSteps", this.attackSteps);
   }
   onPayDamage() {
+    console.log(this.paymentTotal, this.enemyAttackTotal);
     if (this.paymentTotal >= this.enemyAttackTotal) {
       // AFTER SELECTION OF CARDS
       this.moveCardsBetweenPools(this.payDamagePool, "handPool", "discardPool");
@@ -573,6 +577,10 @@ class GameClass {
         "discardPool",
         "handDisabled",
       ]);
+      afterPause(800, () => {
+        this.attackStepIndex += 1;
+        this.evaluateStepAttack();
+      });
     }
   }
   saveGameToStore() {

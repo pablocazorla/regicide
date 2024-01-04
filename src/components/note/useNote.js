@@ -5,12 +5,13 @@ const useNote = () => {
   const { Game, update } = useContext(GameContext);
 
   const [disableButton, setDisableButton] = useState(false);
+  const [payDamageButtonDisabled, setPayDamageButtonDisabled] = useState(false);
 
   const [note, setNote] = useState({
     icon: "",
     text: null,
     values: [],
-    disable: false,
+    forPayDamageButton: false,
     textButton: null,
     action: null,
   });
@@ -20,9 +21,18 @@ const useNote = () => {
     setDisableButton(false);
   }, [Game, update.note]);
 
+  useEffect(() => {
+    if (note.forPayDamageButton) {
+      setPayDamageButtonDisabled(Game.payDamageButtonDisabled);
+    } else {
+      setPayDamageButtonDisabled(false);
+    }
+  }, [Game, note, update.payDamageButtonDisabled]);
+
   return {
     ...note,
-    disableButton: disableButton || note?.disable,
+    loading: disableButton,
+    disableButton: disableButton || payDamageButtonDisabled,
     textButton: note?.textButton || "btn.continue",
     setDisableButton,
   };

@@ -17,6 +17,7 @@ const GameContextProvider = ({ children }) => {
     handDisabled: 0,
     tableAttack: 0,
     payDamagePool: 0,
+    payDamageButtonDisabled: 0,
     //
     note: 0,
   });
