@@ -3,6 +3,7 @@ import TableScreen from "@/components/tableScreen";
 import useApp from "./useApp";
 import StartScreen from "@/components/startScreen";
 import AboutModal from "@/components/about";
+import AppOptionContextProvider from "@/contexts/appOptions/provider";
 
 /*
 
@@ -39,9 +40,9 @@ export default function Home() {
   ];
 
   return (
-    <>
+    <AppOptionContextProvider>
       {screenList[appStatus]}
       <AboutModal visible={visibleAbout} setVisible={setVisibleAbout} />
-    </>
+    </AppOptionContextProvider>
   );
 }

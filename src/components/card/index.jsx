@@ -150,7 +150,7 @@ const Card = ({
                     <Icon type="attack" />
                   </div>
                   <div className="uppercase text-[9px] font-bold">
-                    {I18Ntext("card.attack")}
+                    <I18Ntext str={"card.attack"} />
                   </div>
                 </div>
                 <LifeIndicator life={life} />

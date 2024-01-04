@@ -1,21 +1,17 @@
-import { setOptions, getOptions } from "@/store";
-import { useCallback, useState } from "react";
-import { defaultLanguage } from "@/constants";
+import { setOptions } from "@/store";
+import { useCallback, useContext, useEffect, useState } from "react";
+import AppOptionContext from "@/contexts/appOptions/context";
 
 const useLang = () => {
-  const [lang, setLang] = useState(() => {
-    const options = getOptions();
-    if (options && options.lang) {
-      return options.lang;
-    }
-    return defaultLanguage;
-  });
+  const { lang } = useContext(AppOptionContext);
+
+  const [currentLang, setCurrentLang] = useState(lang);
 
   const onClick = useCallback(() => {
-    setOptions({ lang });
+    setOptions({ lang: currentLang });
     window.location.reload();
-  }, [lang]);
+  }, [currentLang]);
 
-  return { lang, setLang, onClick };
+  return { currentLang, setCurrentLang, onClick };
 };
 export default useLang;

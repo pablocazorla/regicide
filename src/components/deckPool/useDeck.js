@@ -16,8 +16,8 @@ const useDeck = () => {
     setDiscardPool(Game.discardPool);
   }, [Game, update.discardPool]);
 
-  const deckTitle = I18Ntext("deck");
-  const discardTitle = I18Ntext("discard");
+  const deckTitle = <I18Ntext str={"deck"} />;
+  const discardTitle = <I18Ntext str={"discard"} />;
 
   return { deckTitle, discardTitle, deckPool, discardPool };
 };

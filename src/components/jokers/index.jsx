@@ -43,23 +43,23 @@ const Jokers = () => {
               "text-green-300": jokers,
             })}
           >
-            {I18Ntext("useJoker")}
+            <I18Ntext str={"useJoker"} />
           </div>
         </div>
       </div>
       <Modal visible={visible}>
         <div className="text-center font-bold p-2 shadow-xl">
-          {I18Ntext("useJoker.title")}
+          <I18Ntext str={"useJoker.title"} />
         </div>
         <div className="p-4 text-center text-sm">
-          {I18Ntext("useJoker.explanation")}
+          <I18Ntext str={"useJoker.explanation"} />
         </div>
         <div className="flex items-center justify-center gap-4 pt-3 pb-5">
           <button
             className="bg-black/20 leading-none py-3 px-6 rounded-full shadow-md"
             onClick={toggleVisible}
           >
-            {I18Ntext("btn.cancel")}
+            <I18Ntext str={"btn.cancel"} />
           </button>
           <button
             className="flex gap-2 bg-red-600 py-3 px-6 rounded-full shadow-md"
@@ -68,7 +68,9 @@ const Jokers = () => {
             <div className="leading-none">
               <GameIconsJesterHat />
             </div>
-            <div className="leading-none">{I18Ntext("useJoker.btn")}</div>
+            <div className="leading-none">
+              <I18Ntext str={"useJoker.btn"} />
+            </div>
           </button>
         </div>
       </Modal>

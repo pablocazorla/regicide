@@ -30,7 +30,7 @@ const useEnemyPool = () => {
     return enemyPool.length - 1;
   }, [enemyPool]);
 
-  const title = I18Ntext("currentEnemy");
+  const title = <I18Ntext str={"currentEnemy"} />;
 
   return {
     title,

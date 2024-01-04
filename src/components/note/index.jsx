@@ -35,7 +35,7 @@ const Note = ({ className }) => {
             <div className="grow text-[14px] font-medium pt-2 leading-5">
               <div
                 dangerouslySetInnerHTML={{
-                  __html: I18Ntext(text, values),
+                  __html: I18Ntext({ str: text, values }),
                 }}
               />
               {action ? (
@@ -54,7 +54,7 @@ const Note = ({ className }) => {
                     disabled={disableButton}
                   >
                     {loading && <Icon type="loading" />}
-                    {I18Ntext(textButton)}
+                    <I18Ntext str={textButton} />
                   </button>
                 </div>
               ) : null}

@@ -49,8 +49,16 @@ const StartScreen = ({
             Leer más
           </button>
           <hr className="opacity-30" />
-          <div className="flex flex-col items-stretch gap-3 py-3">
-            <div className="py-3">
+          <button
+            className="text-[10px] uppercase   p-4"
+            onClick={() => {
+              setShowLangModal(true);
+            }}
+          >
+            Language / Idioma
+          </button>
+          <div className="flex flex-col items-stretch gap-3 pb-3">
+            <div className="pb-3">
               <button
                 className="border border-dotted border-emerald-600 bg-black/10 py-2 px-6  rounded-lg flex items-center gap-1 mx-auto"
                 onClick={toggleFullScreen}

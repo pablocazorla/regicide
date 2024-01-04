@@ -5,7 +5,7 @@ import { langOptions } from "@/constants";
 import clsx from "clsx";
 
 const LangModal = ({ visible, setVisible }) => {
-  const { lang, setLang, onClick } = useLang(setVisible);
+  const { currentLang, setCurrentLang, onClick } = useLang(setVisible);
 
   return (
     <Modal visible={visible}>
@@ -21,17 +21,19 @@ const LangModal = ({ visible, setVisible }) => {
                 className={clsx(
                   "flex gap-1 items-center justify-center w-full p-2 rounded-md transition-colors",
                   {
-                    "bg-white/5": langOption.value !== lang,
-                    "bg-white/25": langOption.value === lang,
+                    "bg-white/5": langOption.value !== currentLang,
+                    "bg-white/25": langOption.value === currentLang,
                   }
                 )}
                 onClick={() => {
-                  setLang(langOption.value);
+                  setCurrentLang(langOption.value);
                 }}
               >
                 <div className="leading-none text-2xl">
                   <Icon
-                    type={`check${langOption.value === lang ? "Yes" : "No"}`}
+                    type={`check${
+                      langOption.value === currentLang ? "Yes" : "No"
+                    }`}
                   />
                 </div>
                 <div>{langOption.text}</div>

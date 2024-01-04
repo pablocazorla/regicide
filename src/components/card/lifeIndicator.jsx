@@ -40,7 +40,7 @@ const LifeIndicator = ({ life }) => {
         <Icon type="life" />
       </div>
       <div className="uppercase text-[9px] font-bold">
-        {I18Ntext("card.life")}
+        <I18Ntext str={"card.life"} />
       </div>
     </div>
   );

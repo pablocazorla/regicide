@@ -26,7 +26,10 @@ const ActionTable = () => {
               <div>
                 <Icon type={act.icon} />
               </div>
-              <div>{`+${attackBase} ${I18Ntext(act.text)}`}</div>
+              <div>
+                {`+${attackBase} `}
+                <I18Ntext str={act.text} />
+              </div>
             </motion.div>
           );
         })}
@@ -35,7 +38,7 @@ const ActionTable = () => {
             "border-t border-white/30": actionTableList.length,
           })}
         >
-          {I18Ntext("totalAttack")}: <strong>{totalAttack}</strong>
+          <I18Ntext str={"totalAttack"} />: <strong>{totalAttack}</strong>
         </div>
       </div>
 
@@ -46,7 +49,7 @@ const ActionTable = () => {
         <div className="text-lg">
           <Icon type="attack" />
         </div>
-        {I18Ntext("btn.attack")}
+        <I18Ntext str={"btn.attack"} />
       </button>
     </>
   ) : null;

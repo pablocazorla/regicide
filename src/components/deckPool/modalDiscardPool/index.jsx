@@ -18,7 +18,8 @@ const ModalDiscardPool = ({ discardPool }) => {
       <Modal visible={visible}>
         <div className="flex items-center p-2 shadow-xl">
           <div className="grow text-center font-bold">
-            {`${I18Ntext("discard")} (${discardPool.length})`}
+            <I18Ntext str={"discard"} />
+            {` (${discardPool.length})`}
           </div>
           <button
             className="text-xl px-1"
