@@ -33,11 +33,7 @@ const Note = ({ className }) => {
               <Icon type={icon} />
             </div>
             <div className="grow text-[14px] font-medium pt-2 leading-5">
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: I18Ntext({ str: text, values }),
-                }}
-              />
+              <I18Ntext str={text} values={values} isForHTML />
               {action ? (
                 <div className="pt-2">
                   <button

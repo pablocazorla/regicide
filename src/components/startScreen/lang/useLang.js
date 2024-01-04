@@ -1,5 +1,5 @@
 import { setOptions } from "@/store";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import AppOptionContext from "@/contexts/appOptions/context";
 
 const useLang = () => {

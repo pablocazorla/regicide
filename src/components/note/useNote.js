@@ -1,4 +1,5 @@
 import GameContext from "@/contexts/game/context";
+import I18Ntext from "@/i18n";
 import { useState, useEffect, useContext } from "react";
 
 const useNote = () => {
