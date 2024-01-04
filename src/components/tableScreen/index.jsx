@@ -5,12 +5,11 @@ import DeckPool from "@/components/deckPool";
 import TablePool from "@/components/tablePool";
 import HandPool from "@/components/handPool";
 import Header from "@/components/header";
-import AttackProcess from "../attackProcess";
 import GameContextProvider from "@/contexts/game/provider";
 import Jokers from "@/components/jokers";
 import Note from "@/components/note";
 
-const Table = () => {
+const TableScreen = () => {
   return (
     <GameContextProvider>
       <main className="container h-screen overflow-hidden">
@@ -18,16 +17,14 @@ const Table = () => {
         <div className="p-7">
           <div className="flex mb-8 gap-2 items-start">
             <div className="grow">
-              {" "}
-              <EnemyPool />{" "}
+              <EnemyPool />
             </div>
             <div>
               <DeckPool />
-              {/*<Jokers /> */}
+              <Jokers />
             </div>
           </div>
           <TablePool />
-          {/* <AttackProcess /> */}
           <Note className="mb-3" />
           <HandPool />
         </div>
@@ -35,4 +32,4 @@ const Table = () => {
     </GameContextProvider>
   );
 };
-export default Table;
+export default TableScreen;

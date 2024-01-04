@@ -1,9 +1,11 @@
-import es_AR from "./languages/es_AR.json";
+import { getOptions } from "@/store";
+import ES from "./languages/es.json";
+import EN from "./languages/en.json";
 
-const languages = { es_AR };
+const languages = { ES, EN };
 
 // HARDCODED NOW:
-const currentLanguage = "es_AR";
+const currentLanguage = "ES";
 
 export const I18Ntext = (str, values = []) => {
   let text = languages[currentLanguage][str];

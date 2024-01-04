@@ -19,7 +19,7 @@ export const SUITS = [
     key: "D",
   },
   {
-    name: "clovers", // diamante
+    name: "clovers", // tréboles
     key: "C",
   },
 ];

@@ -35,7 +35,8 @@ class GameClass {
     //
     this.enemyLife = 20;
     //
-    this.jokers = 2;
+    this.jokers = 0;
+    this.enabledPlayJokers = false;
     //
     this.status = statusTypes.RESETTING;
     //
@@ -64,13 +65,48 @@ class GameClass {
   reset() {
     const savedGame = getSavedGame();
     if (savedGame) {
+      const {
+        handPool,
+        enemyLife,
+        enemyPool,
+        enemyList,
+        deckPool,
+        discardPool,
+        jokers,
+      } = savedGame;
+      //
+      this.handPool = handPool;
+      this.enemyLife = enemyLife;
+      this.enemyPool = enemyPool;
+      this.enemyList = enemyList;
+      this.deckPool = deckPool;
+      this.discardPool = discardPool;
+      this.jokers = jokers;
+
+      this.status = statusTypes.PLAY_CARDS;
+      this.note = playCardsFromHandNote;
+      this.enabledPlayJokers = true;
+
+      this.onUpdate([
+        "handPool",
+        "enemyLife",
+        "enemyPool",
+        "enemyList",
+        "deckPool",
+        "discardPool",
+        "jokers",
+        "note",
+        "enabledPlayJokers",
+      ]);
+
       //
     } else {
       this.deckPool = shuffle(baseDeck);
       this.enemyPool = createENEMIES();
       this.enemyList = [...this.enemyPool];
+      this.jokers = 2;
 
-      this.onUpdate(["deckPool", "enemyPool", "enemyList"]);
+      this.onUpdate(["deckPool", "enemyPool", "enemyList", "jokers"]);
 
       afterPause(600, () => {
         const [newHand, newDeck] = pick(this.deckPool, 8);
@@ -79,6 +115,7 @@ class GameClass {
         this.status = statusTypes.PLAY_CARDS;
 
         this.note = playCardsFromHandNote;
+        this.enabledPlayJokers = true;
 
         const [newDisabled, newDeck2] = pick(this.deckPool, 4);
         this.deckPool = newDeck2;
@@ -90,6 +127,7 @@ class GameClass {
           "handPool",
           "getHandDisabled",
           "note",
+          "enabledPlayJokers",
         ]);
       });
     }
@@ -106,12 +144,14 @@ class GameClass {
       this.setHandDisabled();
       this.setTableAttack();
       this.note = { text: null };
+      this.enabledPlayJokers = false;
       this.onUpdate([
         "handPool",
         "tablePool",
         "handDisabled",
         "tableAttack",
         "note",
+        "enabledPlayJokers",
       ]);
     }
     if (this.status === statusTypes.CARDS_TO_ATTACK && this.isPayingDamage) {
@@ -146,6 +186,7 @@ class GameClass {
       this.setTableAttack();
       if (!this.tablePool.length) {
         this.note = playCardsFromHandNote;
+        this.enabledPlayJokers = true;
       }
       this.onUpdate([
         "tablePool",
@@ -153,6 +194,7 @@ class GameClass {
         "handDisabled",
         "tableAttack",
         "note",
+        "enabledPlayJokers",
       ]);
     }
   }
@@ -362,7 +404,7 @@ class GameClass {
             );
             const cardsToDraw =
               countToDraw >= this.deckPool.length
-                ? []
+                ? [...this.deckPool]
                 : [...this.deckPool].slice(
                     this.deckPool.length - countToDraw,
                     this.deckPool.length
@@ -556,15 +598,14 @@ class GameClass {
         this.status = statusTypes.PLAY_CARDS;
         this.setHandDisabled();
         this.note = playCardsFromHandNote;
-
-        this.onUpdate(["note", "handDisabled"]);
+        this.enabledPlayJokers = true;
+        this.onUpdate(["note", "handDisabled", "enabledPlayJokers"]);
         break;
       default:
       //
     }
   }
   onPayDamage() {
-    console.log(this.paymentTotal, this.enemyAttackTotal);
     if (this.paymentTotal >= this.enemyAttackTotal) {
       // AFTER SELECTION OF CARDS
       this.moveCardsBetweenPools(this.payDamagePool, "handPool", "discardPool");
@@ -584,7 +625,56 @@ class GameClass {
     }
   }
   saveGameToStore() {
-    console.log("saveGameToStore");
+    const {
+      handPool,
+      enemyLife,
+      enemyPool,
+      enemyList,
+      deckPool,
+      discardPool,
+      jokers,
+    } = this;
+
+    saveGame({
+      handPool,
+      enemyLife,
+      enemyPool,
+      enemyList,
+      deckPool,
+      discardPool,
+      jokers,
+    });
+  }
+  onUseJoker() {
+    if (this.jokers > 0) {
+      this.jokers -= 1;
+      this.moveCardsBetweenPools(this.handPool, "handPool", "discardPool");
+      this.onUpdate(["handPool", "discardPool", "jokers"]);
+
+      afterPause(600, () => {
+        // Draw from deck
+        const countToDraw = 8;
+
+        const newDeckPool = [...this.deckPool].slice(
+          0,
+          this.deckPool.length - countToDraw
+        );
+        const cardsToDraw =
+          countToDraw >= this.deckPool.length
+            ? [...this.deckPool]
+            : [...this.deckPool].slice(
+                this.deckPool.length - countToDraw,
+                this.deckPool.length
+              );
+
+        this.handPool = [...this.handPool].concat(cardsToDraw);
+        this.deckPool = newDeckPool;
+
+        this.onUpdate(["handPool", "deckPool"]);
+
+        this.saveGameToStore();
+      });
+    }
   }
 }
 

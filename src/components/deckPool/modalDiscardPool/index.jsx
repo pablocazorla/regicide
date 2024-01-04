@@ -15,7 +15,6 @@ const ModalDiscardPool = ({ discardPool }) => {
           setVisible(true);
         }}
       />
-      {/* <div className="">ModalDiscardPool</div> */}
       <Modal visible={visible}>
         <div className="flex items-center p-2 shadow-xl">
           <div className="grow text-center font-bold">

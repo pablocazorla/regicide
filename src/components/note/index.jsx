@@ -1,6 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Icon from "../icon";
-import { useState } from "react";
 import clsx from "clsx";
 import I18Ntext from "@/i18n";
 import useNote from "./useNote";
@@ -25,11 +24,11 @@ const Note = ({ className }) => {
           animate={{ opacity: 1, scaleY: 1 }}
           exit={{ opacity: 0, scaleY: 0 }}
           className={clsx(
-            "bg-amber-400 text-amber-950 mb-1 px-2 pt-1 pb-3 shadow-[2px_0_10px_rgba(0,0,0,0.4)] rounded-md",
+            "bg-amber-400 text-amber-950 mb-1 px-3 pt-1 pb-3 shadow-[2px_0_10px_rgba(0,0,0,0.4)] rounded-md",
             className
           )}
         >
-          <div className="flex gap-4">
+          <div className="flex items-center gap-4">
             <div className="text-4xl pt-1">
               <Icon type={icon} />
             </div>

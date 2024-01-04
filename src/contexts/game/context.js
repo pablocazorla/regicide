@@ -1,5 +1,4 @@
 import { createContext } from "react";
-import { statusTypes } from "@/constants";
 
 const GameContext = createContext({
   Game: null,

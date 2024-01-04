@@ -1,4 +1,5 @@
 import Icon from "@/components/icon";
+import I18Ntext from "@/i18n";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 
@@ -38,7 +39,9 @@ const LifeIndicator = ({ life }) => {
       <div className="">
         <Icon type="life" />
       </div>
-      <div className="uppercase text-[9px] font-bold">Vida</div>
+      <div className="uppercase text-[9px] font-bold">
+        {I18Ntext("card.life")}
+      </div>
     </div>
   );
 };

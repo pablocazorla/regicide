@@ -3,7 +3,7 @@ import Card from "@/components/card";
 import Icon from "@/components/icon";
 import clsx from "clsx";
 import useEnemyPool from "./useEnemyPool";
-import { getValues } from "@/utils";
+import { getValues } from "@/game/utils";
 
 const EnemyPool = () => {
   const {

@@ -3,8 +3,7 @@ import Card from "@/components/card";
 import useHand from "./useHand";
 
 const HandPool = () => {
-  const { note, handPool, payDamagePool, handDisable, onClickHandCard } =
-    useHand();
+  const { handPool, payDamagePool, handDisable, onClickHandCard } = useHand();
   return (
     <div className="flex h-72 pt-7">
       <AnimatePresence>

@@ -3,9 +3,6 @@ import GameContext from "@/contexts/game/context";
 import I18Ntext from "@/i18n";
 
 const useEnemyPool = () => {
-  /*   const { enemyList, enemyPool, enemyLife, attackPool } =
-    useContext(GameContext); */
-
   const { Game, update } = useContext(GameContext);
 
   const [enemyPool, setEnemyPool] = useState([]);

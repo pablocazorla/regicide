@@ -1,4 +1,4 @@
-import { useContext, useMemo, useEffect, useState, useCallback } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import GameContext from "@/contexts/game/context";
 
 const useTableAction = () => {

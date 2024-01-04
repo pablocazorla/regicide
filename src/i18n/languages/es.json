@@ -1,5 +1,6 @@
 {
   "playCardsFromHand": "<strong>Juega cartas de tu mano.</strong>",
+  "btn.cancel": "Cancelar",
   "btn.attack": "¡Atacar!",
   "btn.continue": "Continuar",
   "power.H.singular": "<strong>Cura</strong> del descarte <strong>$$$ carta</strong>.",
@@ -23,5 +24,11 @@
   "action.Heal": "Cura descarte",
   "action.Draw": "Robar cartas",
   "action.Damage": "Daño doble",
-  "action.Defense": "Defensa"
+  "action.Defense": "Defensa",
+  "useJoker": "Usar comodín",
+  "useJoker.title": "¿Usar comodín?",
+  "useJoker.explanation": "<strong>Descarta tu mano</strong>,<br />y luego roba hasta <strong>8 cartas</strong>.",
+  "useJoker.btn": "Usar",
+  "card.attack": "Ataque",
+  "card.life": "Vida"
 }

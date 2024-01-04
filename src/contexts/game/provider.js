@@ -12,7 +12,9 @@ const GameContextProvider = ({ children }) => {
     enemyPool: 0,
     enemyList: 0,
     enemyLife: 0,
+    //
     jokers: 0,
+    enabledPlayJokers: 0,
     //
     handDisabled: 0,
     tableAttack: 0,

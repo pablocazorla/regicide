@@ -1,5 +1,5 @@
 "use client";
-import Table from "@/components/table";
+import TableScreen from "@/components/tableScreen";
 import useApp from "./useApp";
 import StartScreen from "@/components/startScreen";
 import AboutModal from "@/components/about";
@@ -31,7 +31,7 @@ export default function Home() {
       isFullScreen={isFullScreen}
       toggleFullScreen={toggleFullScreen}
     />,
-    <Table
+    <TableScreen
       key={1}
       setAppStatus={setAppStatus}
       setVisibleAbout={setVisibleAbout}

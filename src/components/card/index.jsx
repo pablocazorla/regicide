@@ -4,16 +4,13 @@ import Icon from "../icon";
 import { useMemo } from "react";
 import clsx from "clsx";
 import LifeIndicator from "./lifeIndicator";
+import I18Ntext from "@/i18n";
 
-/*
-size
-
+/* size:
 xs
 sm
 md
 lg
-
-
 */
 
 const Card = ({
@@ -152,7 +149,9 @@ const Card = ({
                   <div className="">
                     <Icon type="attack" />
                   </div>
-                  <div className="uppercase text-[9px] font-bold">Ataque</div>
+                  <div className="uppercase text-[9px] font-bold">
+                    {I18Ntext("card.attack")}
+                  </div>
                 </div>
                 <LifeIndicator life={life} />
               </div>

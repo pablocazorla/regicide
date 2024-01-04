@@ -1,7 +1,7 @@
 import { useCallback, useState, useEffect } from "react";
 
 const useApp = () => {
-  const [appStatus, setAppStatus] = useState(1);
+  const [appStatus, setAppStatus] = useState(0);
   const [visibleAbout, setVisibleAbout] = useState(false);
 
   const [isFullScreen, setIsFullScreen] = useState(false);

@@ -3,7 +3,7 @@ import Icon from "../icon";
 import LangModal from "./lang";
 import useStartScreen from "./useStartScreen";
 
-const version = 1.4;
+const version = 1.5;
 
 const StartScreen = ({
   setAppStatus,
