@@ -16,4 +16,4 @@ export const videTutorialURL = {
 
 export const defaultLanguage = "EN";
 
-export const VERSION = 1.7;
+export const VERSION = "1.0";

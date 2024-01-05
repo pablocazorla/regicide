@@ -13,7 +13,7 @@ const AppOptionContextProvider = ({ children }) => {
   const [showHowToPlay, setShowHowToPlay] = useState(false);
 
   useEffect(() => {
-    setAppStatus(2);
+    setAppStatus(1);
     //
     const detectFullscreen = () => {
       if (document.fullscreenElement) {
