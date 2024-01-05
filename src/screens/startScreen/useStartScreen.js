@@ -3,7 +3,7 @@ import { getSavedGame, clearGame, getOptions } from "@/store";
 import AppOptionContext from "@/contexts/appOptions/context";
 
 const useStartScreen = () => {
-  const { setAppStatus, setVisibleAbout, isFullScreen } =
+  const { lang, setAppStatus, setVisibleAbout, isFullScreen } =
     useContext(AppOptionContext);
 
   const [savedGame, setSavedGame] = useState(null);
@@ -44,6 +44,7 @@ const useStartScreen = () => {
   }, []);
 
   return {
+    lang,
     showLangModal,
     setShowLangModal,
     savedGame,

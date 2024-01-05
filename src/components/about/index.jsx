@@ -1,6 +1,10 @@
 import Modal from "../modal";
+import { useCallback, useEffect, useState, useContext } from "react";
+import AppOptionContext from "@/contexts/appOptions/context";
 
-const AboutModal = ({ visible, setVisible }) => {
-  return <Modal visible={visible}>AboutModal</Modal>;
+const AboutModal = () => {
+  const { visibleAbout, setVisibleAbout } = useContext(AppOptionContext);
+
+  return <Modal visible={visibleAbout}>AboutModal</Modal>;
 };
 export default AboutModal;

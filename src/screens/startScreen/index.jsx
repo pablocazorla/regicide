@@ -4,10 +4,11 @@ import Icon from "@/components/icon";
 import LangModal from "./lang";
 import useStartScreen from "./useStartScreen";
 
-const version = 1.6;
+const version = 1.7;
 
 const StartScreen = () => {
   const {
+    lang,
     savedGame,
     showLangModal,
     setShowLangModal,
@@ -96,7 +97,7 @@ const StartScreen = () => {
             </button>
             <div className="pt-4">
               <a
-                href=""
+                href={`/help/${lang.toLowerCase()}.pdf`}
                 className="underline"
                 target="_blank"
                 rel="noreferrer noopener"
