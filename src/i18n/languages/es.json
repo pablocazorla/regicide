@@ -3,6 +3,7 @@
   "btn.cancel": "Cancelar",
   "btn.attack": "¡Atacar!",
   "btn.continue": "Continuar",
+  "btn.backToMainScreen": "Volver a la pantalla inicial",
   "power.H.singular": "<strong>Cura</strong> del descarte <strong>$$$ carta</strong>.",
   "power.H.plural": "<strong>Cura</strong> del descarte <strong>$$$ cartas</strong>.",
   "btn.Heal": "Curar",
@@ -40,5 +41,15 @@
   "btn.continueGame": "Continuar partida",
   "btn.newGame": "Nueva partida",
   "continueGame.or.newGame": "o",
-  "btn.learnToPlay": "Aprender a jugar (nueva página)."
+  "btn.learnToPlay": "Aprender a jugar (nueva página).",
+  "lostScreen.title": "¡Perdiste!",
+  "lostScreen.lead": " Hiciste tu mejor esfuerzo,<br/>...pero no fue suficiente.",
+  "win.title": "¡Ganaste!",
+  "win.lead": "¡Felicitaciones!<br />Jugaste muy bien tus cartas,<br />y venciste a todos los enemigos.",
+  "win.trophy.0": "Victoria de BRONCE",
+  "win.trophy.1": "Victoria de PLATA",
+  "win.trophy.2": "Victoria de ORO",
+  "win.trophy.lead.0": "utilizaste los 2 comodines",
+  "win.trophy.lead.1": "utilizaste sólo 1 comodín",
+  "win.trophy.lead.2": "no utilizaste ningún comodín"
 }

@@ -1,7 +1,11 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useContext } from "react";
 import { getSavedGame, clearGame, getOptions } from "@/store";
+import AppOptionContext from "@/contexts/appOptions/context";
 
-const useStartScreen = (setAppStatus) => {
+const useStartScreen = () => {
+  const { setAppStatus, setVisibleAbout, isFullScreen } =
+    useContext(AppOptionContext);
+
   const [savedGame, setSavedGame] = useState(null);
 
   const [showLangModal, setShowLangModal] = useState(false);
@@ -31,6 +35,14 @@ const useStartScreen = (setAppStatus) => {
     }, 500);
   }, [setAppStatus]);
 
+  const toggleFullScreen = useCallback(() => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }, []);
+
   return {
     showLangModal,
     setShowLangModal,
@@ -38,6 +50,10 @@ const useStartScreen = (setAppStatus) => {
     onClickContinueGame,
     onClickNewGame,
     loadingForNewGame,
+    //
+    setVisibleAbout,
+    isFullScreen,
+    toggleFullScreen,
   };
 };
 

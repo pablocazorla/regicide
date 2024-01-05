@@ -1,8 +1,11 @@
 import GameContext from "./context";
 import GameClass from "@/game";
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useContext, useRef, useEffect, useState, useCallback } from "react";
+import AppOptionContext from "@/contexts/appOptions/context";
 
 const GameContextProvider = ({ children }) => {
+  const { setAppStatus, setJokersToWin } = useContext(AppOptionContext);
+
   const [update, setUpdate] = useState({
     deckPool: 0,
     discardPool: 0,
@@ -42,7 +45,7 @@ const GameContextProvider = ({ children }) => {
     });
   }, []);
 
-  const Game = useRef(new GameClass(onUpdate));
+  const Game = useRef(new GameClass(onUpdate, setAppStatus, setJokersToWin));
 
   useEffect(() => {
     Game.current.reset();

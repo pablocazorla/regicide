@@ -1,9 +1,35 @@
 import { getOptions, setOptions } from "@/store";
 import { defaultLanguage } from "@/constants";
 import AppOptionContext from "./context";
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 const AppOptionContextProvider = ({ children }) => {
+  const [appStatus, setAppStatus] = useState(0);
+  const [visibleAbout, setVisibleAbout] = useState(false);
+
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  const [jokersToWin, setJokersToWin] = useState(0);
+
+  useEffect(() => {
+    setAppStatus(1);
+    //
+    const detectFullscreen = () => {
+      if (document.fullscreenElement) {
+        setIsFullScreen(true);
+      } else {
+        setIsFullScreen(false);
+      }
+    };
+
+    detectFullscreen();
+
+    window.addEventListener("fullscreenchange", detectFullscreen);
+
+    return () => {
+      window.removeEventListener("fullscreenchange", detectFullscreen);
+    };
+  }, []);
+
   const lang = useMemo(() => {
     const options = getOptions();
     if (options && options.lang) {
@@ -16,6 +42,13 @@ const AppOptionContextProvider = ({ children }) => {
     <AppOptionContext.Provider
       value={{
         lang,
+        appStatus,
+        setAppStatus,
+        visibleAbout,
+        setVisibleAbout,
+        isFullScreen,
+        jokersToWin,
+        setJokersToWin,
       }}
     >
       {children}

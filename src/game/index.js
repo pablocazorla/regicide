@@ -16,8 +16,10 @@ import {
 } from "./utils";
 
 class GameClass {
-  constructor(onUpdate) {
+  constructor(onUpdate, setAppStatus, setJokersToWin) {
     this.onUpdate = onUpdate;
+    this.setAppStatus = setAppStatus;
+    this.setJokersToWin = setJokersToWin;
     //
     this.deckPool = [];
     this.discardPool = [];
@@ -102,8 +104,8 @@ class GameClass {
       //
     } else {
       this.deckPool = shuffle(baseDeck);
-      this.enemyPool = createENEMIES();
-      this.enemyList = [...this.enemyPool];
+      this.enemyList = createENEMIES();
+      this.enemyPool = [...this.enemyList];
       this.jokers = 2;
 
       this.onUpdate(["deckPool", "enemyPool", "enemyList", "jokers"]);
@@ -511,7 +513,7 @@ class GameClass {
             text: "payDamage.1",
             action: () => {
               // LOST ACTION
-              console.log("YOU LOST");
+              this.setAppStatus(3);
             },
           };
           this.onUpdate(["note"]);
@@ -583,7 +585,10 @@ class GameClass {
         afterPause(600, () => {
           if (!this.enemyPool.length) {
             // WIN
-            console.log("WIN");
+            afterPause(400, () => {
+              this.setJokersToWin(this.jokers);
+              this.setAppStatus(4);
+            });
           } else {
             this.attackStepIndex += 1;
             this.evaluateStepAttack();

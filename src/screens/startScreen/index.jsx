@@ -1,17 +1,12 @@
 "use client";
 import I18Ntext from "@/i18n";
-import Icon from "../icon";
+import Icon from "@/components/icon";
 import LangModal from "./lang";
 import useStartScreen from "./useStartScreen";
 
-const version = 1.5;
+const version = 1.6;
 
-const StartScreen = ({
-  setAppStatus,
-  setVisibleAbout,
-  isFullScreen,
-  toggleFullScreen,
-}) => {
+const StartScreen = () => {
   const {
     savedGame,
     showLangModal,
@@ -19,7 +14,10 @@ const StartScreen = ({
     onClickContinueGame,
     onClickNewGame,
     loadingForNewGame,
-  } = useStartScreen(setAppStatus);
+    setVisibleAbout,
+    isFullScreen,
+    toggleFullScreen,
+  } = useStartScreen();
 
   return (
     <>
