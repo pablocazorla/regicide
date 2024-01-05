@@ -119,10 +119,6 @@ class GameClass {
         this.note = playCardsFromHandNote;
         this.enabledPlayJokers = true;
 
-        const [newDisabled, newDeck2] = pick(this.deckPool, 4);
-        this.deckPool = newDeck2;
-        this.discardPool = newDisabled;
-
         this.onUpdate([
           "discardPool",
           "deckPool",

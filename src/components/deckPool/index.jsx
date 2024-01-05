@@ -8,21 +8,21 @@ const DeckPool = () => {
   return (
     <div className="flex justify-end items-start gap-2">
       <div className="">
-        <div className="relative w-10 h-16 border border-green-600 rounded">
+        <div className="relative w-10 h-16 border border-green-400 rounded">
           <AnimatePresence>
             {deckPool.map((v, k) => {
               return <Card key={v + k} v={v} back size="xs" absolute />;
             })}
           </AnimatePresence>
         </div>
-        <div className="text-green-300 uppercase text-center pt-1">
+        <div className="text-green-200 uppercase text-center pt-1">
           <div className="text-xs font-bold">{deckPool.length}</div>
           <div className="text-[9px]">{deckTitle}</div>
         </div>
       </div>
 
       <div className="">
-        <div className="relative mx-auto w-10 h-16 border border-green-600 rounded">
+        <div className="relative mx-auto w-10 h-16 border border-green-400 rounded">
           <AnimatePresence>
             {discardPool.map((v, k) => {
               return <Card key={v + k} v={v} size="xs" absolute />;
@@ -30,7 +30,7 @@ const DeckPool = () => {
           </AnimatePresence>
           <ModalDiscardPool discardPool={discardPool} />
         </div>
-        <div className="text-green-300 uppercase text-center pt-1">
+        <div className="text-green-200 uppercase text-center pt-1">
           <div className="text-xs font-bold">{discardPool.length}</div>
           <div className="text-[9px]">{discardTitle}</div>
         </div>

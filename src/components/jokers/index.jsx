@@ -13,7 +13,7 @@ const Jokers = () => {
       <div className="pt-5 pl-2" onClick={toggleVisible}>
         <div
           className={clsx(
-            "border border-dotted border-green-500 pt-2 rounded-lg",
+            "border border-dotted border-green-300 pt-2 rounded-lg backdrop-blur-sm",
             {
               "opacity-20": !enabledPlayJokers,
             }
@@ -40,7 +40,7 @@ const Jokers = () => {
           <div
             className={clsx("text-[9px] py-1 uppercase text-center", {
               "text-black": !jokers,
-              "text-green-300": jokers,
+              "text-green-200": jokers,
             })}
           >
             <I18Ntext str={"useJoker"} />

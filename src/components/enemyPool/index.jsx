@@ -18,7 +18,7 @@ const EnemyPool = () => {
   return (
     <div className="flex gap-6">
       <div className="">
-        <div className="relative w-36 h-56 border border-green-600 rounded-lg">
+        <div className="relative w-36 h-56 border border-green-300 rounded-lg">
           <AnimatePresence>
             {enemyPool.map((v) => {
               return <Card key={v} v={v} size="md" life={enemyLife} absolute />;
@@ -32,12 +32,12 @@ const EnemyPool = () => {
             </AnimatePresence>
           </div>
         </div>
-        <div className="text-green-400 text-xs uppercase text-center pt-2 relative z-10">
+        <div className="text-green-200 text-xs uppercase text-center pt-2 relative z-10">
           {title}
         </div>
       </div>
       <div className="py-1">
-        <div className="border-l-2 border-green-400/40 h-full">
+        <div className="border-l-2 border-green-200/40 h-full">
           <div className="grid grid-rows-12 h-full">
             {enemyList.map((enemy, k) => {
               const [num, suit] = getValues(enemy);
@@ -47,7 +47,7 @@ const EnemyPool = () => {
                   className={clsx(
                     "flex items-center gap-2 w-11 relative -left-1",
                     {
-                      "border-t border-green-400/70 border-dotted":
+                      "border-t border-green-200/70 border-dotted":
                         !(k % 4) && k !== 0,
                     }
                   )}
@@ -58,7 +58,7 @@ const EnemyPool = () => {
                     className={clsx(
                       "text-xs leading-none flex gap-1 items-center relative",
                       {
-                        "text-green-400": k !== currentEnemyIndex,
+                        "text-green-300": k !== currentEnemyIndex,
                         "text-white": k === currentEnemyIndex,
                       }
                     )}
@@ -72,7 +72,7 @@ const EnemyPool = () => {
                       </>
                     )}
                     {k > currentEnemyIndex ? (
-                      <div className="absolute top-1/2 left-0 w-6 h-[1px] bg-green-400 -rotate-12" />
+                      <div className="absolute top-1/2 left-0 w-6 h-[1px] bg-green-200 -rotate-12" />
                     ) : null}
                   </div>
                 </div>

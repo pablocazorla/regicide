@@ -3,8 +3,7 @@ import I18Ntext from "@/i18n";
 import Icon from "@/components/icon";
 import LangModal from "./lang";
 import useStartScreen from "./useStartScreen";
-
-const version = 1.7;
+import { VERSION } from "@/constants";
 
 const StartScreen = () => {
   const {
@@ -30,7 +29,7 @@ const StartScreen = () => {
             <span className="uppercase font-bold">
               <I18Ntext str="solo.title" />
             </span>
-            <span className="pl-2 text-[9px]">{`v.${version}`}</span>
+            <span className="pl-2 text-[9px]">{`v.${VERSION}`}</span>
           </div>
           <hr className="opacity-30 mb-3" />
           <p className="mb-3">

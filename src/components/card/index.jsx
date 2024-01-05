@@ -70,7 +70,8 @@ const Card = ({
         "bg-gray-500 border border-gray-400 bg-cover bg-center bg-no-repeat":
           back && !disabled && !highlighted,
         "bg-gray-300 border border-gray-300": disabled && !highlighted,
-        "bg-red-200 border-red-300": !back && !disabled && highlighted,
+        "bg-red-200 border-red-300 shadow-[inset_0_0_16px_rgba(255,0,0,1)]":
+          !back && !disabled && highlighted,
         relative: !absolute,
         "absolute top-0 left-0": absolute,
 
