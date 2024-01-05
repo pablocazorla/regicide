@@ -10,6 +10,8 @@ const AppOptionContextProvider = ({ children }) => {
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [jokersToWin, setJokersToWin] = useState(0);
 
+  const [showHowToPlay, setShowHowToPlay] = useState(false);
+
   useEffect(() => {
     setAppStatus(1);
     //
@@ -49,6 +51,8 @@ const AppOptionContextProvider = ({ children }) => {
         isFullScreen,
         jokersToWin,
         setJokersToWin,
+        showHowToPlay,
+        setShowHowToPlay,
       }}
     >
       {children}

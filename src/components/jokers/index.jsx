@@ -52,7 +52,7 @@ const Jokers = () => {
           <I18Ntext str={"useJoker.title"} />
         </div>
         <div className="p-4 text-center text-sm">
-          <I18Ntext str={"useJoker.explanation"} />
+          <I18Ntext str={"useJoker.explanation"} isForHTML />
         </div>
         <div className="flex items-center justify-center gap-4 pt-3 pb-5">
           <button

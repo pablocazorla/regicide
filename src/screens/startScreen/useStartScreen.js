@@ -3,8 +3,13 @@ import { getSavedGame, clearGame, getOptions } from "@/store";
 import AppOptionContext from "@/contexts/appOptions/context";
 
 const useStartScreen = () => {
-  const { lang, setAppStatus, setVisibleAbout, isFullScreen } =
-    useContext(AppOptionContext);
+  const {
+    lang,
+    setAppStatus,
+    setVisibleAbout,
+    isFullScreen,
+    setShowHowToPlay,
+  } = useContext(AppOptionContext);
 
   const [savedGame, setSavedGame] = useState(null);
 
@@ -55,6 +60,7 @@ const useStartScreen = () => {
     setVisibleAbout,
     isFullScreen,
     toggleFullScreen,
+    setShowHowToPlay,
   };
 };
 

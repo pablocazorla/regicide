@@ -78,7 +78,13 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={montserrat.className + " overflow-hidden select-none"}>
+      <body
+        className={
+          montserrat.className +
+          " overflow-hidden select-none bg-cover bg-center bg-no-repeat min-h-screen"
+        }
+        style={{ backgroundImage: `url("/img/regicide-bg.svg")` }}
+      >
         {children}
       </body>
     </html>

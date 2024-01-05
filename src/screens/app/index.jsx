@@ -5,6 +5,7 @@ import LostScreen from "@/screens/lostScreen";
 import WinScreen from "@/screens/winScreen";
 import AboutModal from "@/components/about";
 import useApp from "./useApp";
+import HowToPlayModal from "@/components/howToPlay";
 
 /*
 
@@ -30,6 +31,7 @@ export default function MainApp() {
     <>
       {screenList[appStatus]}
       <AboutModal />
+      <HowToPlayModal />
     </>
   );
 }

@@ -10,6 +10,8 @@ const AppOptionContext = createContext({
   isFullScreen: false,
   jokersToWin: 0,
   setJokersToWin: () => {},
+  showHowToPlay: false,
+  setShowHowToPlay: () => {},
 });
 
 export default AppOptionContext;

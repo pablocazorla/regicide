@@ -18,6 +18,7 @@ const StartScreen = () => {
     setVisibleAbout,
     isFullScreen,
     toggleFullScreen,
+    setShowHowToPlay,
   } = useStartScreen();
 
   return (
@@ -96,19 +97,14 @@ const StartScreen = () => {
               <I18Ntext str="btn.newGame" />
             </button>
             <div className="pt-4">
-              <a
-                href={`/help/${lang.toLowerCase()}.pdf`}
-                className="underline"
-                target="_blank"
-                rel="noreferrer noopener"
+              <button
+                className="underline text-xs"
+                onClick={() => {
+                  setShowHowToPlay(true);
+                }}
               >
-                <span className="text-lg mr-1">
-                  <Icon type="link" />
-                </span>
-                <span className="text-xs">
-                  <I18Ntext str="btn.learnToPlay" />
-                </span>
-              </a>
+                <I18Ntext str="btn.howToPlay" />
+              </button>
             </div>
           </div>
         </div>

@@ -67,7 +67,8 @@ const Card = ({
         "w-36 h-56 rounded-lg border": size === "md",
         "w-48 h-72 rounded-lg border": size === "lg",
         "bg-white border border-gray-300": !back && !disabled && !highlighted,
-        "bg-gray-500 border border-gray-400": back && !disabled && !highlighted,
+        "bg-gray-500 border border-gray-400 bg-cover bg-center bg-no-repeat":
+          back && !disabled && !highlighted,
         "bg-gray-300 border border-gray-300": disabled && !highlighted,
         "bg-red-200 border-red-300": !back && !disabled && highlighted,
         relative: !absolute,
@@ -80,6 +81,9 @@ const Card = ({
         "cursor-not-allowed": disabled && typeof onClick !== "undefined",
         "cursor-default": typeof onClick === "undefined",
       })}
+      style={
+        back ? { backgroundImage: `url("/img/regicide-bg-card.svg")` } : null
+      }
       onClick={() => {
         if (!disabled && onClick) {
           onClick();

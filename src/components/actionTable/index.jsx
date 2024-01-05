@@ -43,7 +43,7 @@ const ActionTable = () => {
       </div>
 
       <button
-        className="bg-red-700 text-sm font-bold uppercase py-2 px-6 rounded-full shadow-lg active:shadow-none active:bg-red-500 transition-colors w-full flex items-center gap-1"
+        className="bg-red-700 text-sm font-bold uppercase py-2 px-6 rounded-full shadow-lg active:shadow-none active:bg-red-500 transition-colors w-full flex items-center gap-1 justify-center"
         onClick={onClickAttackButton}
       >
         <div className="text-lg">

@@ -29,7 +29,7 @@ const Note = ({ className }) => {
           )}
         >
           <div className="flex items-center gap-4">
-            <div className="text-4xl pt-1">
+            <div className="text-6xl pt-1">
               <Icon type={icon} />
             </div>
             <div className="grow text-[14px] font-medium pt-2 leading-5">

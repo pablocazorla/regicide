@@ -41,7 +41,9 @@
   "btn.continueGame": "Continuar partida",
   "btn.newGame": "Nueva partida",
   "continueGame.or.newGame": "o",
-  "btn.learnToPlay": "Aprender a jugar (nueva página).",
+  "btn.howToPlay": "Aprende a jugar",
+  "howToPlay.title": "¿Cómo se juega?",
+  "btn.getRules": "Reglas en PDF (nueva página)",
   "lostScreen.title": "¡Perdiste!",
   "lostScreen.lead": " Hiciste tu mejor esfuerzo,<br/>...pero no fue suficiente.",
   "win.title": "¡Ganaste!",
@@ -51,5 +53,11 @@
   "win.trophy.2": "Victoria de ORO",
   "win.trophy.lead.0": "utilizaste los 2 comodines",
   "win.trophy.lead.1": "utilizaste sólo 1 comodín",
-  "win.trophy.lead.2": "no utilizaste ningún comodín"
+  "win.trophy.lead.2": "no utilizaste ningún comodín",
+  "about.title": "Acerca de Regicide",
+  "about.p.1": "Regicide es un <strong>juego cooperativo</strong> donde los jugadores deberán <strong>unir sus fuerzas</strong> para derrotar a 12 poderosos enemigos.<br />Los jugadores juegan cartas por turnos para <strong>atacar al enemigo</strong>, quien será derrotado cuando le causen suficientes puntos de daño.",
+  "about.p.2": "Esta es una aplicación para que puedas probar el juego en solitario.<br />Si te gusta el juego y quieres saber más, contacta y apoya a los diseñadores:",
+  "about.author.title": "Sobre el autor de la aplicación",
+  "about.author.p.1": "Mi nombre es <a href=\"https://github.com/pablocazorla\" target=\"_blank\" rel=\"noreferrer noopener\" class=\"underline font-bold\">Pablo Cazorla</a>.<br />Soy desarrollador fullstack,apasionado por los juegos de mesa, y argentino.",
+  "about.author.p.2": "Esta aplicación ha sido creada <strong>sin ánimo de lucro</strong> y sólo para practicar mis habilidades como desarrollador, pero si te gusta mi trabajo y quieres que siga produciendo cosas hermosas, puedes colaborar <strong>\"comprándome un café\"</strong>:"
 }
