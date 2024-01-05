@@ -24,6 +24,7 @@ const Card = ({
   onClick,
   highlighted,
   noLayout,
+  enemySuit,
 }) => {
   const { num, suit, isRed, isFigure, attackPower } = useMemo(() => {
     const arr = v.split("_");
@@ -118,6 +119,7 @@ const Card = ({
                 className={clsx({
                   "text-5xl": size === "sm",
                   "text-2xl": size === "lg" || size === "xs" || size === "md",
+                  "opacity-40": suit === enemySuit,
                 })}
               />
               {attackPower && size === "lg" ? (
@@ -137,6 +139,8 @@ const Card = ({
                       "text-gray-800": !isRed,
                       "text-red-600": isRed,
                       "opacity-20": isFigure && size === "md",
+                      "opacity-30":
+                        !isFigure && size !== "md" && suit === enemySuit,
                     })}
                   >
                     <Icon type={suit} className="text-[6rem]" />

@@ -3,7 +3,8 @@ import Card from "@/components/card";
 import useHand from "./useHand";
 
 const HandPool = () => {
-  const { handPool, payDamagePool, handDisable, onClickHandCard } = useHand();
+  const { handPool, enemySuit, payDamagePool, handDisable, onClickHandCard } =
+    useHand();
   return (
     <div className="flex h-72 pt-7">
       <AnimatePresence>
@@ -21,6 +22,7 @@ const HandPool = () => {
             >
               <Card
                 v={v}
+                enemySuit={enemySuit}
                 onClick={() => {
                   onClickHandCard(v);
                 }}

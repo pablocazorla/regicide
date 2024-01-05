@@ -10,6 +10,8 @@ const useEnemyPool = () => {
   const [enemyLife, setEnemyLife] = useState(20);
   const [attackPool, setAttackPool] = useState([]);
 
+  const [enemySuit, setEnemySuit] = useState(null);
+
   useEffect(() => {
     setEnemyPool(Game.enemyPool);
   }, [Game, update.enemyPool]);
@@ -26,6 +28,10 @@ const useEnemyPool = () => {
     setAttackPool(Game.attackPool);
   }, [Game, update.attackPool]);
 
+  useEffect(() => {
+    setEnemySuit(Game.enemySuit);
+  }, [Game, update.enemySuit]);
+
   const currentEnemyIndex = useMemo(() => {
     return enemyPool.length - 1;
   }, [enemyPool]);
@@ -38,6 +44,7 @@ const useEnemyPool = () => {
     enemyPool,
     enemyLife,
     attackPool,
+    enemySuit,
     currentEnemyIndex,
   };
 };

@@ -8,6 +8,8 @@ const useHand = () => {
   const [payDamagePool, setPayDamagePool] = useState([]);
   const [handDisable, setHandDisable] = useState({});
 
+  const [enemySuit, setEnemySuit] = useState(null);
+
   useEffect(() => {
     setHandPool(Game.handPool);
   }, [Game, update.handPool]);
@@ -20,6 +22,10 @@ const useHand = () => {
     setHandDisable(Game.handDisabled);
   }, [Game, update.handDisabled]);
 
+  useEffect(() => {
+    setEnemySuit(Game.enemySuit);
+  }, [Game, update.enemySuit]);
+
   const onClickHandCard = useCallback(
     (card) => {
       Game.onClickHandCard(card);
@@ -29,6 +35,7 @@ const useHand = () => {
 
   return {
     handPool,
+    enemySuit,
     payDamagePool,
     handDisable,
     onClickHandCard,

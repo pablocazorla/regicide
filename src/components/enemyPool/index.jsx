@@ -12,6 +12,7 @@ const EnemyPool = () => {
     enemyPool,
     enemyLife,
     attackPool,
+    enemySuit,
     currentEnemyIndex,
   } = useEnemyPool();
 
@@ -27,7 +28,15 @@ const EnemyPool = () => {
           <div className="absolute flex gap-1 justify-center -left-3 -right-3 -bottom-7 z-20">
             <AnimatePresence>
               {attackPool.map((v) => {
-                return <Card key={v} v={v} size="xs" shadowHover />;
+                return (
+                  <Card
+                    key={v}
+                    v={v}
+                    enemySuit={enemySuit}
+                    size="xs"
+                    shadowHover
+                  />
+                );
               })}
             </AnimatePresence>
           </div>

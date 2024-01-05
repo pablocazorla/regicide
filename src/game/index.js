@@ -45,6 +45,7 @@ class GameClass {
     this.handDisabled = {};
 
     this.tableAttack = null;
+    this.currentSuit = null;
 
     this.note = {
       icon: "",
@@ -89,6 +90,9 @@ class GameClass {
       this.note = playCardsFromHandNote;
       this.enabledPlayJokers = true;
 
+      const currentEnemy = this.enemyPool[this.enemyPool.length - 1];
+      this.enemySuit = getValues(currentEnemy)[1];
+
       this.onUpdate([
         "handPool",
         "enemyLife",
@@ -99,6 +103,7 @@ class GameClass {
         "jokers",
         "note",
         "enabledPlayJokers",
+        "enemySuit",
       ]);
 
       //
@@ -108,7 +113,16 @@ class GameClass {
       this.enemyPool = [...this.enemyList];
       this.jokers = 2;
 
-      this.onUpdate(["deckPool", "enemyPool", "enemyList", "jokers"]);
+      const currentEnemy = this.enemyPool[this.enemyPool.length - 1];
+      this.enemySuit = getValues(currentEnemy)[1];
+
+      this.onUpdate([
+        "deckPool",
+        "enemyPool",
+        "enemyList",
+        "jokers",
+        "enemySuit",
+      ]);
 
       afterPause(600, () => {
         const [newHand, newDeck] = pick(this.deckPool, 8);
@@ -271,14 +285,11 @@ class GameClass {
   }
   setTableAttack() {
     if (this.tablePool.length) {
-      const currentEnemy = this.enemyPool[this.enemyPool.length - 1];
-      const [, enemySuit] = getValues(currentEnemy);
-
       const { powers, attackBase } = this.tablePool.reduce(
         (obj, card) => {
           const [cardAttack, cardSuit] = getValues(card, true);
 
-          if (cardSuit !== enemySuit) {
+          if (cardSuit !== this.enemySuit) {
             obj.powers[cardSuit] = true;
           }
           obj.attackBase += cardAttack;
@@ -565,12 +576,14 @@ class GameClass {
             }
             if (this.enemyPool.length) {
               const nextEnemy = this.enemyPool[this.enemyPool.length - 1];
-              const [nextEnemyNum] = getValues(nextEnemy);
+              const [nextEnemyNum, nextEnemySuit] = getValues(nextEnemy);
               this.enemyLife = enemyValues[nextEnemyNum].life;
+              this.enemySuit = nextEnemySuit;
             }
 
             this.onUpdate([
               "enemyLife",
+              "enemySuit",
               "enemyPool",
               "deckPool",
               "discardPool",

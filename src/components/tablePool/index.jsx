@@ -5,7 +5,7 @@ import ActionTable from "@/components/actionTable";
 import clsx from "clsx";
 
 const TablePool = () => {
-  const { tablePool, onClickTableCard } = useTablePool();
+  const { enemySuit, tablePool, onClickTableCard } = useTablePool();
   return (
     <div
       className={clsx({
@@ -20,6 +20,7 @@ const TablePool = () => {
                 <Card
                   key={v + k}
                   v={v}
+                  enemySuit={enemySuit}
                   onClick={() => {
                     onClickTableCard(v);
                   }}

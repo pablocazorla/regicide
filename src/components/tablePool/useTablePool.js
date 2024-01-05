@@ -6,9 +6,15 @@ const useTablePool = () => {
 
   const [tablePool, setTablePool] = useState([]);
 
+  const [enemySuit, setEnemySuit] = useState(null);
+
   useEffect(() => {
     setTablePool(Game.tablePool);
   }, [Game, update.tablePool]);
+
+  useEffect(() => {
+    setEnemySuit(Game.enemySuit);
+  }, [Game, update.enemySuit]);
 
   const onClickTableCard = useCallback(
     (card) => {
@@ -17,7 +23,7 @@ const useTablePool = () => {
     [Game]
   );
 
-  return { tablePool, onClickTableCard };
+  return { enemySuit, tablePool, onClickTableCard };
 };
 
 export default useTablePool;

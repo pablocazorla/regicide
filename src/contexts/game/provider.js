@@ -15,6 +15,7 @@ const GameContextProvider = ({ children }) => {
     enemyPool: 0,
     enemyList: 0,
     enemyLife: 0,
+    enemySuit: 0,
     //
     jokers: 0,
     enabledPlayJokers: 0,
