@@ -28,7 +28,10 @@ const HandPool = () => {
               <div
                 className="w-[12.5%]"
                 key={v}
-                style={{ transform: `rotate(${ang}deg)` }}
+                style={{
+                  transform: `rotate(${ang}deg)`,
+                  transition: "transform 0.6s",
+                }}
               >
                 <Card
                   v={v}
