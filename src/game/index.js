@@ -679,8 +679,13 @@ class GameClass {
               this.setAppStatus(4);
             });
           } else {
-            this.attackStepIndex += 1;
-            this.evaluateStepAttack();
+            if (!this.jokers && !this.handPool.length) {
+              // LOST ACTION
+              this.setAppStatus(3);
+            } else {
+              this.attackStepIndex += 1;
+              this.evaluateStepAttack();
+            }
           }
         });
 
