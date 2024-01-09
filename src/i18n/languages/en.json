@@ -64,5 +64,11 @@
   "menu.howToPlay": "How to play?",
   "menu.about": "About Regicide",
   "menu.exit": "Exit game",
-  "defense": "Shield"
+  "defense": "Shield",
+  "modeSilence.use": "Use silent mode",
+  "modeSilence.title": "Silent mode",
+  "modeSilence.lead": "If you already know the game mechanics, you may want to play in <strong>silent mode</strong>.<br/><br/>In silent mode <strong>you will not see</strong> as many notifications about the actions that occur in the game, thus speeding up the flow of the game.<br/><br/>You can always remove silent mode from the <strong>application menu</strong>.",
+  "menu.modeSilence.use": "Use silent mode",
+  "menu.modeSilence.quit": "Remove silent mode",
+  "ordered.hand": "Keep your hand sorted by suit"
 }

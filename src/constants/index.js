@@ -17,3 +17,10 @@ export const videTutorialURL = {
 export const defaultLanguage = "EN";
 
 export const VERSION = "1.0";
+
+export const handOrderSuit = {
+  H: 0,
+  D: 1,
+  C: 2,
+  S: 3,
+};

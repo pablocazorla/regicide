@@ -74,12 +74,13 @@ class GameClass {
     setOptions({ modeSilence: this.modeSilence });
   }
   reset() {
-    /*  const options = getOptions();
+    const options = getOptions();
     if (options && typeof options.modeSilence !== "undefined") {
       this.modeSilence = options.modeSilence;
+      this.onUpdate(["modeSilence"]);
     }
- */
-    const savedGame = null; //getSavedGame();
+
+    const savedGame = getSavedGame();
     if (savedGame) {
       const {
         handPool,

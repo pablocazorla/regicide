@@ -64,9 +64,9 @@ const Card = ({
         relative: !absolute,
         "absolute top-0 left-0": absolute,
 
-        shadow: size === "xs" && !shadowHover,
-        "shadow-lg": size !== "xs" && !shadowHover,
-        "shadow-[0_3px_6px_rgba(0,0,0,0.9)]": shadowHover,
+        shadow: size === "xs" && !shadowHover && !highlighted,
+        "shadow-lg": size !== "xs" && !shadowHover && !highlighted,
+        "shadow-[0_3px_6px_rgba(0,0,0,0.9)]": shadowHover && !highlighted,
         "cursor-pointer": !disabled && typeof onClick !== "undefined",
         "cursor-not-allowed": disabled && typeof onClick !== "undefined",
         "cursor-default": typeof onClick === "undefined",

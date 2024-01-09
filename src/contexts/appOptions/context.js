@@ -12,6 +12,8 @@ const AppOptionContext = createContext({
   setJokersToWin: () => {},
   showHowToPlay: false,
   setShowHowToPlay: () => {},
+  orderedHand: false,
+  toggleOrderedHand: () => {},
 });
 
 export default AppOptionContext;

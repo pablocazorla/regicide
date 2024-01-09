@@ -1,7 +1,7 @@
 import { getOptions, setOptions } from "@/store";
 import { defaultLanguage } from "@/constants";
 import AppOptionContext from "./context";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useCallback } from "react";
 
 const AppOptionContextProvider = ({ children }) => {
   const [appStatus, setAppStatus] = useState(0);
@@ -12,8 +12,21 @@ const AppOptionContextProvider = ({ children }) => {
 
   const [showHowToPlay, setShowHowToPlay] = useState(false);
 
+  const [lang, setLang] = useState(defaultLanguage);
+  const [orderedHand, setOrderedHand] = useState(false);
+
   useEffect(() => {
-    setAppStatus(2);
+    const options = getOptions();
+    if (options) {
+      if (options.lang) {
+        setLang(options.lang);
+      }
+      if (options.orderedHand) {
+        setOrderedHand(true);
+      }
+    }
+    //
+    setAppStatus(1);
     //
     const detectFullscreen = () => {
       if (document.fullscreenElement) {
@@ -32,12 +45,13 @@ const AppOptionContextProvider = ({ children }) => {
     };
   }, []);
 
-  const lang = useMemo(() => {
-    const options = getOptions();
-    if (options && options.lang) {
-      return options.lang;
-    }
-    return defaultLanguage;
+  const toggleOrderedHand = useCallback(() => {
+    setOrderedHand((oldOrderedHand) => {
+      setOptions({
+        orderedHand: !oldOrderedHand,
+      });
+      return !oldOrderedHand;
+    });
   }, []);
 
   return (
@@ -53,6 +67,8 @@ const AppOptionContextProvider = ({ children }) => {
         setJokersToWin,
         showHowToPlay,
         setShowHowToPlay,
+        orderedHand,
+        toggleOrderedHand,
       }}
     >
       {children}
