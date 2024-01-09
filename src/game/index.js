@@ -110,28 +110,23 @@ class GameClass {
       this.deckPool = shuffle(baseDeck);
       this.enemyList = createENEMIES();
       this.enemyPool = [...this.enemyList];
-      this.jokers = 2;
 
       const currentEnemy = this.enemyPool[this.enemyPool.length - 1];
       this.enemySuit = getValues(currentEnemy)[1];
 
-      this.onUpdate([
-        "deckPool",
-        "enemyPool",
-        "enemyList",
-        "jokers",
-        "enemySuit",
-      ]);
+      this.onUpdate(["deckPool", "enemyPool", "enemyList", "enemySuit"]);
 
       afterPause(600, () => {
-        const [newHand, newDeck] = pick(this.deckPool, 3);
+        const [newHand, newDeck] = pick(this.deckPool, 8);
         this.deckPool = newDeck;
         this.handPool = newHand;
         this.status = statusTypes.PLAY_CARDS;
 
         this.note = playCardsFromHandNote;
+        this.jokers = 2;
 
         this.onUpdate([
+          "jokers",
           "discardPool",
           "deckPool",
           "handPool",
@@ -321,8 +316,6 @@ class GameClass {
       enemyAttackPartial - this.defenseDamage
     );
     this.nextEnemyLife = this.enemyLife - totalAttack;
-
-    console.log("this.enemyAttackTotal", this.enemyAttackTotal);
 
     this.attackSteps = [];
     this.attackStepIndex = 0;

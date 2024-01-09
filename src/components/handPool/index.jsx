@@ -1,6 +1,8 @@
 import { AnimatePresence } from "framer-motion";
 import Card from "@/components/card";
 import useHand from "./useHand";
+import Icon from "../icon";
+import I18Ntext from "@/i18n";
 
 const HandPool = () => {
   const { handPool, enemySuit, payDamagePool, handDisable, onClickHandCard } =

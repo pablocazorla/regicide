@@ -69,7 +69,7 @@ const Jokers = () => {
               <Icon type="joker" />
             </div>
             <div className="leading-none">
-              <I18Ntext str={"useJoker.btn"} />
+              <I18Ntext str="useJoker.btn" />
             </div>
           </button>
         </div>
