@@ -16,6 +16,7 @@
   "afterAttack.3": "You have <strong>eliminated the Enemy</strong>, but with a value <strong>greater than its life</strong>, so it goes to the <strong>discard pile</strong>.",
   "applyAttack": "<strong>Attacking...</strong>",
   "payDamage.1": "<strong>You don't have enough cards left to resist the enemy attack...</strong>",
+  "payDamage.1.5": "<strong>You don't have enough cards left</strong> to resist the enemy attack, but you can use a jester in order to  <strong>update your hand</strong> and resist the attack:",
   "payDamage.2": "<strong>Select cards from your hand</strong> to discard and <strong>pay</strong> damage<br/>(<strong>$$$ damage</strong>).",
   "btn.payDamage": "Pay damage",
   "currentEnemy": "Current enemy",
@@ -62,5 +63,6 @@
   "about.author.p.2": "This application has been created <strong>without profit</strong> and only to practice my skills as a developer, but if you like my work and want me to continue producing beautiful things, you can collaborate by <strong>\"buying me a coffee\"</strong>:",
   "menu.howToPlay": "How to play?",
   "menu.about": "About Regicide",
-  "menu.exit": "Exit game"
+  "menu.exit": "Exit game",
+  "defense": "Shield"
 }

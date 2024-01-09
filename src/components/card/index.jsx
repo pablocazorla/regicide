@@ -4,7 +4,9 @@ import Icon from "../icon";
 import { useMemo } from "react";
 import clsx from "clsx";
 import LifeIndicator from "./lifeIndicator";
-import I18Ntext from "@/i18n";
+import { enemyValues } from "@/game/constants";
+import { getValues } from "@/game/utils";
+import AttackIndicator from "./attackIndicator";
 
 /* size:
 xs
@@ -27,28 +29,14 @@ const Card = ({
   enemySuit,
 }) => {
   const { num, suit, isRed, isFigure, attackPower } = useMemo(() => {
-    const arr = v.split("_");
+    const [numDef, suit] = getValues(v);
 
-    const num = arr[0] === "1" ? "A" : arr[0];
-    const suit = arr[1];
+    const num = numDef === "1" ? "A" : numDef;
     const isRed = suit === "H" || suit === "D";
 
     const isFigure = "JQK".indexOf(`${num}`) >= 0;
 
-    const attackPower = (() => {
-      if (!isFigure) {
-        return null;
-      }
-      switch (num) {
-        case "J":
-          return 10;
-        case "Q":
-          return 15;
-        default:
-          // K
-          return 20;
-      }
-    })();
+    const attackPower = isFigure ? enemyValues[num].attack : null;
 
     return {
       num,
@@ -151,17 +139,9 @@ const Card = ({
           </div>
 
           {isFigure && size === "md" ? (
-            <div className="absolute top-1/2 left-0 w-full">
+            <div className="absolute top-1/3 left-0 w-full">
               <div className="px-4">
-                <div className="flex items-center bg-slate-700 justify-center rounded-full gap-1 border-2 border-white shadow-md mb-2">
-                  <div className="font-bold text-lg">{attackPower}</div>
-                  <div className="">
-                    <Icon type="attack" />
-                  </div>
-                  <div className="uppercase text-[9px] font-bold">
-                    <I18Ntext str={"card.attack"} />
-                  </div>
-                </div>
+                <AttackIndicator attack={attackPower} />
                 <LifeIndicator life={life} />
               </div>
             </div>

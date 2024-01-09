@@ -38,7 +38,7 @@ class GameClass {
     this.enemyLife = 20;
     //
     this.jokers = 0;
-    this.enabledPlayJokers = false;
+    this.enabledButtonJokers = true;
     //
     this.status = statusTypes.RESETTING;
     //
@@ -46,6 +46,7 @@ class GameClass {
 
     this.tableAttack = null;
     this.currentSuit = null;
+    //
 
     this.note = {
       icon: "",
@@ -66,7 +67,7 @@ class GameClass {
     this.nextEnemyLife = 0;
   }
   reset() {
-    const savedGame = getSavedGame();
+    const savedGame = null; //getSavedGame();
     if (savedGame) {
       const {
         handPool,
@@ -88,7 +89,6 @@ class GameClass {
 
       this.status = statusTypes.PLAY_CARDS;
       this.note = playCardsFromHandNote;
-      this.enabledPlayJokers = true;
 
       const currentEnemy = this.enemyPool[this.enemyPool.length - 1];
       this.enemySuit = getValues(currentEnemy)[1];
@@ -102,7 +102,6 @@ class GameClass {
         "discardPool",
         "jokers",
         "note",
-        "enabledPlayJokers",
         "enemySuit",
       ]);
 
@@ -125,13 +124,12 @@ class GameClass {
       ]);
 
       afterPause(600, () => {
-        const [newHand, newDeck] = pick(this.deckPool, 8);
+        const [newHand, newDeck] = pick(this.deckPool, 3);
         this.deckPool = newDeck;
         this.handPool = newHand;
         this.status = statusTypes.PLAY_CARDS;
 
         this.note = playCardsFromHandNote;
-        this.enabledPlayJokers = true;
 
         this.onUpdate([
           "discardPool",
@@ -139,7 +137,6 @@ class GameClass {
           "handPool",
           "getHandDisabled",
           "note",
-          "enabledPlayJokers",
         ]);
       });
     }
@@ -156,14 +153,12 @@ class GameClass {
       this.setHandDisabled();
       this.setTableAttack();
       this.note = { text: null };
-      this.enabledPlayJokers = false;
       this.onUpdate([
         "handPool",
         "tablePool",
         "handDisabled",
         "tableAttack",
         "note",
-        "enabledPlayJokers",
       ]);
     }
     if (this.status === statusTypes.CARDS_TO_ATTACK && this.isPayingDamage) {
@@ -198,7 +193,6 @@ class GameClass {
       this.setTableAttack();
       if (!this.tablePool.length) {
         this.note = playCardsFromHandNote;
-        this.enabledPlayJokers = true;
       }
       this.onUpdate([
         "tablePool",
@@ -206,7 +200,6 @@ class GameClass {
         "handDisabled",
         "tableAttack",
         "note",
-        "enabledPlayJokers",
       ]);
     }
   }
@@ -319,12 +312,17 @@ class GameClass {
 
     const { powers, attackBase, totalAttack } = this.tableAttack;
 
-    this.defenseDamage = powers?.S ? attackBase : 0;
+    this.defenseDamage += powers?.S ? attackBase : 0;
     //
     const [enemyLetter] = getValues(this.enemyPool[this.enemyPool.length - 1]);
     const enemyAttackPartial = enemyValues[enemyLetter].attack;
-    this.enemyAttackTotal = enemyAttackPartial - this.defenseDamage;
+    this.enemyAttackTotal = Math.max(
+      0,
+      enemyAttackPartial - this.defenseDamage
+    );
     this.nextEnemyLife = this.enemyLife - totalAttack;
+
+    console.log("this.enemyAttackTotal", this.enemyAttackTotal);
 
     this.attackSteps = [];
     this.attackStepIndex = 0;
@@ -352,7 +350,7 @@ class GameClass {
     this.attackSteps.push("SAVE_GAME");
 
     //
-    this.onUpdate(["tablePool", "attackPool", "handDisabled"]);
+    this.onUpdate(["tablePool", "attackPool", "handDisabled", "defenseDamage"]);
 
     afterPause(600, () => {
       this.evaluateStepAttack();
@@ -496,7 +494,7 @@ class GameClass {
         this.note = {
           icon: "S",
           text: "power.S",
-          values: [attackBase],
+          values: [this.defenseDamage],
           action: () => {
             afterPause(300, () => {
               this.attackStepIndex += 1;
@@ -514,17 +512,11 @@ class GameClass {
           return total;
         }, 0);
 
-        if (this.enemyAttackTotal >= handDefense) {
-          this.note = {
-            icon: "warning",
-            text: "payDamage.1",
-            action: () => {
-              // LOST ACTION
-              this.setAppStatus(3);
-            },
-          };
-          this.onUpdate(["note"]);
-        } else {
+        const canPlay =
+          this.enemyAttackTotal < handDefense ||
+          (this.enemyAttackTotal === handDefense && this.jokers > 0);
+
+        if (canPlay) {
           this.isPayingDamage = true;
           this.payDamagePool = [];
           this.paymentTotal = 0;
@@ -542,6 +534,35 @@ class GameClass {
             },
           };
           this.onUpdate(["note", "payDamageButtonDisabled", "handDisabled"]);
+        } else {
+          if (this.jokers > 0) {
+            this.enabledButtonJokers = false;
+            //
+            this.note = {
+              icon: "joker",
+              text: "payDamage.1.5",
+              textButton: "useJoker",
+              action: () => {
+                this.onUseJoker();
+                this.enabledButtonJokers = true;
+                this.onUpdate(["enabledButtonJokers"]);
+                afterPause(1300, () => {
+                  this.evaluateStepAttack();
+                });
+              },
+            };
+            this.onUpdate(["note", "enabledButtonJokers"]);
+          } else {
+            this.note = {
+              icon: "warning",
+              text: "payDamage.1",
+              action: () => {
+                // LOST ACTION
+                this.setAppStatus(3);
+              },
+            };
+            this.onUpdate(["note"]);
+          }
         }
 
         break;
@@ -579,6 +600,7 @@ class GameClass {
               const [nextEnemyNum, nextEnemySuit] = getValues(nextEnemy);
               this.enemyLife = enemyValues[nextEnemyNum].life;
               this.enemySuit = nextEnemySuit;
+              this.defenseDamage = 0;
             }
 
             this.onUpdate([
@@ -587,6 +609,7 @@ class GameClass {
               "enemyPool",
               "deckPool",
               "discardPool",
+              "defenseDamage",
             ]);
           }
         });
@@ -612,8 +635,7 @@ class GameClass {
         this.status = statusTypes.PLAY_CARDS;
         this.setHandDisabled();
         this.note = playCardsFromHandNote;
-        this.enabledPlayJokers = true;
-        this.onUpdate(["note", "handDisabled", "enabledPlayJokers"]);
+        this.onUpdate(["note", "handDisabled"]);
         break;
       default:
       //
@@ -663,7 +685,11 @@ class GameClass {
     if (this.jokers > 0) {
       this.jokers -= 1;
       this.moveCardsBetweenPools(this.handPool, "handPool", "discardPool");
-      this.onUpdate(["handPool", "discardPool", "jokers"]);
+
+      if (this.tablePool.length) {
+        this.moveCardsBetweenPools(this.tablePool, "tablePool", "discardPool");
+      }
+      this.onUpdate(["tablePool", "handPool", "discardPool", "jokers"]);
 
       afterPause(600, () => {
         // Draw from deck
@@ -684,7 +710,14 @@ class GameClass {
         this.handPool = [...this.handPool].concat(cardsToDraw);
         this.deckPool = newDeckPool;
 
-        this.onUpdate(["handPool", "deckPool"]);
+        if (this.status === statusTypes.PLAY_CARDS) {
+          this.note = playCardsFromHandNote;
+          this.onUpdate(["note"]);
+        }
+
+        this.setHandDisabled();
+
+        this.onUpdate(["handDisabled", "handPool", "deckPool"]);
 
         this.saveGameToStore();
       });

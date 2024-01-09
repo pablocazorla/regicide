@@ -18,7 +18,7 @@ const GameContextProvider = ({ children }) => {
     enemySuit: 0,
     //
     jokers: 0,
-    enabledPlayJokers: 0,
+    enabledButtonJokers: 0,
     //
     handDisabled: 0,
     tableAttack: 0,
@@ -26,6 +26,8 @@ const GameContextProvider = ({ children }) => {
     payDamageButtonDisabled: 0,
     //
     note: 0,
+    //
+    defenseDamage: 0,
   });
 
   const onUpdate = useCallback((list) => {

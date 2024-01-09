@@ -1,11 +1,11 @@
 import clsx from "clsx";
 import useJokers from "./useJokers";
 import Modal from "../modal";
-import GameIconsJesterHat from "./icon";
 import I18Ntext from "@/i18n";
+import Icon from "../icon";
 
 const Jokers = () => {
-  const { jokers, enabledPlayJokers, visible, toggleVisible, onUseJoker } =
+  const { enabledButtonJokers, jokers, visible, toggleVisible, onUseJoker } =
     useJokers();
 
   return (
@@ -13,9 +13,9 @@ const Jokers = () => {
       <div className="pt-5 pl-2" onClick={toggleVisible}>
         <div
           className={clsx(
-            "border border-dotted border-green-300 pt-2 rounded-lg backdrop-blur-sm",
+            "border border-dotted border-green-300 pt-2 rounded-lg backdrop-blur-sm cursor-pointer",
             {
-              "opacity-20": !enabledPlayJokers,
+              "opacity-40": !enabledButtonJokers,
             }
           )}
         >
@@ -26,7 +26,7 @@ const Jokers = () => {
                 "text-green-300": jokers >= 1,
               })}
             >
-              <GameIconsJesterHat />
+              <Icon type="joker" />
             </div>
             <div
               className={clsx({
@@ -34,7 +34,7 @@ const Jokers = () => {
                 "text-green-300": jokers === 2,
               })}
             >
-              <GameIconsJesterHat />
+              <Icon type="joker" />
             </div>
           </div>
           <div
@@ -62,11 +62,11 @@ const Jokers = () => {
             <I18Ntext str={"btn.cancel"} />
           </button>
           <button
-            className="flex gap-2 bg-red-600 py-3 px-6 rounded-full shadow-md"
+            className="flex gap-2 items-center bg-red-600 py-3 px-6 rounded-full shadow-md"
             onClick={onUseJoker}
           >
             <div className="leading-none">
-              <GameIconsJesterHat />
+              <Icon type="joker" />
             </div>
             <div className="leading-none">
               <I18Ntext str={"useJoker.btn"} />

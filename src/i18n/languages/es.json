@@ -16,6 +16,7 @@
   "afterAttack.3": "Has <strong>eliminado al Enemigo</strong>, pero con un valor <strong>mayor a su vida</strong>, por lo que va a la <strong>pila de descarte</strong>.",
   "applyAttack": "<strong>Atacando...</strong>",
   "payDamage.1": "<strong>No te quedan cartas suficientes para resistir el ataque enemigo...</strong>",
+  "payDamage.1.5": "<strong>No te quedan cartas suficientes</strong> para resistir el ataque enemigo, pero sí puedes usar un comodín para <strong>actualizar tu mano</strong> y resistir el ataque</strong>:",
   "payDamage.2": "<strong>Selecciona cartas de tu mano</strong> para descartar y <strong>pagar</strong> el daño<br/>(<strong>$$$ de daño</strong>).",
   "btn.payDamage": "Pagar daño",
   "currentEnemy": "Enemigo actual",
@@ -62,5 +63,6 @@
   "about.author.p.2": "Esta aplicación ha sido creada <strong>sin ánimo de lucro</strong> y sólo para practicar mis habilidades como desarrollador, pero si te gusta mi trabajo y quieres que siga produciendo cosas hermosas, puedes colaborar <strong>\"comprándome un café\"</strong>:",
   "menu.howToPlay": "¿Cómo se juega?",
   "menu.about": "Acerca de Regicide",
-  "menu.exit": "Salir de la partida"
+  "menu.exit": "Salir de la partida",
+  "defense": "Defensa"
 }

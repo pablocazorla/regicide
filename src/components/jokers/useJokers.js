@@ -6,34 +6,33 @@ const useJokers = () => {
 
   const [visible, setVisible] = useState(false);
   const [jokers, setJokers] = useState(0);
-
-  const [enabledPlayJokers, setEnabledPlayJokers] = useState(false);
+  const [enabledButtonJokers, setEnabledButtonJokers] = useState(false);
 
   useEffect(() => {
     setJokers(Game.jokers);
   }, [Game, update.jokers]);
 
   useEffect(() => {
-    setEnabledPlayJokers(Game.enabledPlayJokers);
-  }, [Game, update.enabledPlayJokers]);
+    setEnabledButtonJokers(Game.enabledButtonJokers);
+  }, [Game, update.enabledButtonJokers]);
 
   const toggleVisible = useCallback(() => {
-    if (enabledPlayJokers) {
-      setVisible((v) => {
-        if (jokers && !v) {
-          return true;
-        }
-        return false;
-      });
-    }
-  }, [jokers, enabledPlayJokers]);
+    setVisible((v) => {
+      if (enabledButtonJokers && jokers && !v) {
+        return true;
+      }
+      return false;
+    });
+  }, [enabledButtonJokers, jokers]);
 
   const onUseJoker = useCallback(() => {
-    setVisible(false);
-    Game.onUseJoker();
-  }, [Game]);
+    if (enabledButtonJokers) {
+      setVisible(false);
+      Game.onUseJoker();
+    }
+  }, [enabledButtonJokers, Game]);
 
-  return { jokers, visible, enabledPlayJokers, toggleVisible, onUseJoker };
+  return { enabledButtonJokers, jokers, visible, toggleVisible, onUseJoker };
 };
 
 export default useJokers;
