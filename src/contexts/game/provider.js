@@ -28,6 +28,8 @@ const GameContextProvider = ({ children }) => {
     note: 0,
     //
     defenseDamage: 0,
+    //
+    modeSilence: 0,
   });
 
   const onUpdate = useCallback((list) => {

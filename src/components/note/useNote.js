@@ -13,6 +13,7 @@ const useNote = () => {
     text: null,
     values: [],
     forPayDamageButton: false,
+    showModeSilence: false,
     textButton: null,
     action: null,
   });

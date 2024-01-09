@@ -1,16 +1,24 @@
-import { useCallback, useState, useContext } from "react";
+import { useCallback, useState, useContext, useEffect } from "react";
 import AppOptionContext from "@/contexts/appOptions/context";
+import GameContext from "@/contexts/game/context";
 
 const useHeader = () => {
-  const {
-    lang,
-    setAppStatus,
-    setVisibleAbout,
-    isFullScreen,
-    setShowHowToPlay,
-  } = useContext(AppOptionContext);
+  const { setAppStatus, setVisibleAbout, isFullScreen, setShowHowToPlay } =
+    useContext(AppOptionContext);
+
+  const { Game, update } = useContext(GameContext);
 
   const [showMenu, setShowMenu] = useState(false);
+  const [modeSilence, setModeSilence] = useState(false);
+
+  useEffect(() => {
+    setModeSilence(Game.modeSilence);
+  }, [Game, update.modeSilence]);
+
+  const toggleModeSilence = useCallback(() => {
+    setShowMenu(false);
+    Game.toggleModeSilence();
+  }, [Game]);
 
   const toggleMenu = useCallback(() => {
     setShowMenu((v) => !v);
@@ -30,7 +38,15 @@ const useHeader = () => {
     setAppStatus(1);
   }, [setAppStatus]);
 
-  return { showMenu, toggleMenu, showHowToPlay, showAbout, exitGame };
+  return {
+    modeSilence,
+    toggleModeSilence,
+    showMenu,
+    toggleMenu,
+    showHowToPlay,
+    showAbout,
+    exitGame,
+  };
 };
 
 export default useHeader;

@@ -54,4 +54,5 @@ export const enemyValues = {
 export const playCardsFromHandNote = {
   icon: "idea",
   text: "playCardsFromHand",
+  showModeSilence: true,
 };

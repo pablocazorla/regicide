@@ -12,7 +12,7 @@ const LangModal = ({ visible, setVisible }) => {
       <header className="text-center bg-black/20 p-3 text-sm uppercase">
         Language / Idioma
       </header>
-      <section className="">
+      <section>
         <div className="flex flex-col gap-3 py-3 px-6">
           {langOptions.map((langOption) => {
             return (

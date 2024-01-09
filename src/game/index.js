@@ -1,4 +1,4 @@
-import { getSavedGame, saveGame } from "@/store";
+import { getSavedGame, saveGame, getOptions, setOptions } from "@/store";
 import {
   baseDeck,
   statusTypes,
@@ -65,8 +65,20 @@ class GameClass {
     this.defenseDamage = 0;
     this.enemyAttackTotal = 0;
     this.nextEnemyLife = 0;
+    //
+    this.modeSilence = false;
+  }
+  toggleModeSilence() {
+    this.modeSilence = !this.modeSilence;
+    this.onUpdate(["modeSilence"]);
+    setOptions({ modeSilence: this.modeSilence });
   }
   reset() {
+    /*  const options = getOptions();
+    if (options && typeof options.modeSilence !== "undefined") {
+      this.modeSilence = options.modeSilence;
+    }
+ */
     const savedGame = null; //getSavedGame();
     if (savedGame) {
       const {
@@ -88,7 +100,9 @@ class GameClass {
       this.jokers = jokers;
 
       this.status = statusTypes.PLAY_CARDS;
-      this.note = playCardsFromHandNote;
+      if (!this.modeSilence) {
+        this.note = playCardsFromHandNote;
+      }
 
       const currentEnemy = this.enemyPool[this.enemyPool.length - 1];
       this.enemySuit = getValues(currentEnemy)[1];
@@ -122,7 +136,9 @@ class GameClass {
         this.handPool = newHand;
         this.status = statusTypes.PLAY_CARDS;
 
-        this.note = playCardsFromHandNote;
+        if (!this.modeSilence) {
+          this.note = playCardsFromHandNote;
+        }
         this.jokers = 2;
 
         this.onUpdate([
@@ -186,7 +202,8 @@ class GameClass {
       this.moveCardsBetweenPools([card], "tablePool", "handPool");
       this.setHandDisabled();
       this.setTableAttack();
-      if (!this.tablePool.length) {
+
+      if (!this.tablePool.length && !this.modeSilence) {
         this.note = playCardsFromHandNote;
       }
       this.onUpdate([
@@ -367,135 +384,181 @@ class GameClass {
             ? []
             : discardPoolShuffled.slice(attackBase, discardPoolShuffled.length);
 
-        this.note = {
-          icon: "H",
-          text:
-            cardsToRecover.length === 1 ? "power.H.singular" : "power.H.plural",
-          values: [cardsToRecover.length],
-          textButton: "btn.Heal",
-          action: () => {
-            this.discardPool = newDiscardPool;
-            this.deckPool = cardsToRecover.concat([...this.deckPool]);
-            this.attackStepIndex += 1;
+        const actionH = () => {
+          this.discardPool = newDiscardPool;
+          this.deckPool = cardsToRecover.concat([...this.deckPool]);
+          this.attackStepIndex += 1;
 
-            this.onUpdate(["discardPool", "deckPool"]);
-            //
-            afterPause(600, () => {
-              this.evaluateStepAttack();
-            });
-          },
+          this.onUpdate(["discardPool", "deckPool"]);
+          //
+          afterPause(600, () => {
+            this.evaluateStepAttack();
+          });
         };
-        this.onUpdate(["note"]);
+
+        if (this.modeSilence) {
+          actionH();
+        } else {
+          this.note = {
+            icon: "H",
+            text:
+              cardsToRecover.length === 1
+                ? "power.H.singular"
+                : "power.H.plural",
+            values: [cardsToRecover.length],
+            textButton: "btn.Heal",
+            action: actionH,
+          };
+          this.onUpdate(["note"]);
+        }
+
         //
         break;
       case "D":
-        this.note = {
-          icon: "D",
-          text: "power.D",
-          values: [attackBase],
-          textButton: "btn.Draw",
-          action: () => {
-            // Draw from deck
-            const countToDraw = Math.min(attackBase, 8 - this.handPool.length);
+        const actionD = () => {
+          // Draw from deck
+          const countToDraw = Math.min(attackBase, 8 - this.handPool.length);
 
-            const newDeckPool = [...this.deckPool].slice(
-              0,
-              this.deckPool.length - countToDraw
-            );
-            const cardsToDraw =
-              countToDraw >= this.deckPool.length
-                ? [...this.deckPool]
-                : [...this.deckPool].slice(
-                    this.deckPool.length - countToDraw,
-                    this.deckPool.length
-                  );
+          const newDeckPool = [...this.deckPool].slice(
+            0,
+            this.deckPool.length - countToDraw
+          );
+          const cardsToDraw =
+            countToDraw >= this.deckPool.length
+              ? [...this.deckPool]
+              : [...this.deckPool].slice(
+                  this.deckPool.length - countToDraw,
+                  this.deckPool.length
+                );
 
-            this.handPool = [...this.handPool].concat(cardsToDraw);
-            this.deckPool = newDeckPool;
-            this.setHandDisabled();
-            this.attackStepIndex += 1;
+          this.handPool = [...this.handPool].concat(cardsToDraw);
+          this.deckPool = newDeckPool;
+          this.setHandDisabled();
+          this.attackStepIndex += 1;
 
-            this.onUpdate(["handPool", "deckPool", "handDisabled"]);
+          this.onUpdate(["handPool", "deckPool", "handDisabled"]);
 
-            afterPause(600, () => {
-              this.evaluateStepAttack();
-            });
-          },
+          afterPause(600, () => {
+            this.evaluateStepAttack();
+          });
         };
-        this.onUpdate(["note"]);
+
+        if (this.modeSilence) {
+          actionD();
+        } else {
+          this.note = {
+            icon: "D",
+            text: "power.D",
+            values: [attackBase],
+            textButton: "btn.Draw",
+            action: actionD,
+          };
+          this.onUpdate(["note"]);
+        }
         break;
       case "C":
-        this.note = {
-          icon: "C",
-          text: "power.C",
-          values: [totalAttack],
-          action: () => {
-            this.attackStepIndex += 1;
-            afterPause(600, () => {
-              this.evaluateStepAttack();
-            });
-          },
+        const actionC = () => {
+          this.attackStepIndex += 1;
+          afterPause(600, () => {
+            this.evaluateStepAttack();
+          });
         };
-        this.onUpdate(["note"]);
+
+        if (this.modeSilence) {
+          actionC();
+        } else {
+          this.note = {
+            icon: "C",
+            text: "power.C",
+            values: [totalAttack],
+            action: actionC,
+          };
+          this.onUpdate(["note"]);
+        }
+
         break;
       case "APPLY_ATTACK":
         //
 
-        this.note = {
-          icon: "attack",
-          text: "applyAttack",
-        };
+        if (this.modeSilence) {
+          afterPause(120, () => {
+            this.enemyLife = this.nextEnemyLife;
+            this.onUpdate(["enemyLife"]);
+          });
 
-        this.onUpdate(["note"]);
+          afterPause(300, () => {
+            this.attackStepIndex += 1;
+            this.evaluateStepAttack();
+          });
+        } else {
+          this.note = {
+            icon: "attack",
+            text: "applyAttack",
+          };
+          this.onUpdate(["note"]);
 
-        afterPause(500, () => {
-          this.enemyLife = this.nextEnemyLife;
-          this.onUpdate(["enemyLife"]);
-        });
+          afterPause(500, () => {
+            this.enemyLife = this.nextEnemyLife;
+            this.onUpdate(["enemyLife"]);
+          });
 
-        afterPause(1000, () => {
-          this.attackStepIndex += 1;
-          this.evaluateStepAttack();
-        });
+          afterPause(1000, () => {
+            this.attackStepIndex += 1;
+            this.evaluateStepAttack();
+          });
+        }
+
         break;
       case "AFTER_ATTACK":
-        //
-        this.note = {
-          icon: "attack",
-          text: (() => {
-            if (this.enemyLife > 0) {
-              return "afterAttack.1";
-            }
-            if (this.enemyLife === 0) {
-              return "afterAttack.2";
-            }
-            if (this.enemyLife < 0) {
-              return "afterAttack.3";
-            }
-          })(),
-          action: () => {
-            afterPause(600, () => {
-              this.attackStepIndex += 1;
-              this.evaluateStepAttack();
-            });
-          },
+        const actionAFTER_ATTACK = () => {
+          afterPause(600, () => {
+            this.attackStepIndex += 1;
+            this.evaluateStepAttack();
+          });
         };
-        this.onUpdate(["note"]);
+
+        if (this.modeSilence) {
+          actionAFTER_ATTACK();
+        } else {
+          this.note = {
+            icon: "attack",
+            text: (() => {
+              if (this.enemyLife > 0) {
+                return "afterAttack.1";
+              }
+              if (this.enemyLife === 0) {
+                return "afterAttack.2";
+              }
+              if (this.enemyLife < 0) {
+                return "afterAttack.3";
+              }
+            })(),
+            action: actionAFTER_ATTACK,
+          };
+          this.onUpdate(["note"]);
+        }
+
         break;
       case "S":
-        //
-        this.note = {
-          icon: "S",
-          text: "power.S",
-          values: [this.defenseDamage],
-          action: () => {
-            afterPause(300, () => {
-              this.attackStepIndex += 1;
-              this.evaluateStepAttack();
-            });
-          },
+        const actionS = () => {
+          afterPause(300, () => {
+            this.attackStepIndex += 1;
+            this.evaluateStepAttack();
+          });
         };
-        this.onUpdate(["note"]);
+        //
+        if (this.modeSilence) {
+          actionS();
+        } else {
+          this.note = {
+            icon: "S",
+            text: "power.S",
+            values: [this.defenseDamage],
+            action: actionS,
+          };
+          this.onUpdate(["note"]);
+        }
+
         break;
       case "PAY_DAMAGE":
         //
@@ -627,7 +690,9 @@ class GameClass {
         this.saveGameToStore();
         this.status = statusTypes.PLAY_CARDS;
         this.setHandDisabled();
-        this.note = playCardsFromHandNote;
+        if (!this.modeSilence) {
+          this.note = playCardsFromHandNote;
+        }
         this.onUpdate(["note", "handDisabled"]);
         break;
       default:
@@ -703,7 +768,7 @@ class GameClass {
         this.handPool = [...this.handPool].concat(cardsToDraw);
         this.deckPool = newDeckPool;
 
-        if (this.status === statusTypes.PLAY_CARDS) {
+        if (this.status === statusTypes.PLAY_CARDS && !this.modeSilence) {
           this.note = playCardsFromHandNote;
           this.onUpdate(["note"]);
         }

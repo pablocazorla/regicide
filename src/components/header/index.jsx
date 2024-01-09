@@ -4,8 +4,15 @@ import useHeader from "./useHeader";
 import I18Ntext from "@/i18n";
 
 const Header = () => {
-  const { showMenu, toggleMenu, showHowToPlay, showAbout, exitGame } =
-    useHeader();
+  const {
+    modeSilence,
+    toggleModeSilence,
+    showMenu,
+    toggleMenu,
+    showHowToPlay,
+    showAbout,
+    exitGame,
+  } = useHeader();
   return (
     <>
       <header className="shadow-[0_1px_5px_rgba(0,0,0,0.3)] relative z-20">
@@ -33,6 +40,11 @@ const Header = () => {
             <div className="text-center text-xl font-bold flex flex-col w-screen gap-4 px-11">
               <button className="block w-full" onClick={showHowToPlay}>
                 <I18Ntext str="menu.howToPlay" />
+              </button>
+              <button className="block w-full" onClick={toggleModeSilence}>
+                <I18Ntext
+                  str={`menu.modeSilence.${modeSilence ? "quit" : "use"}`}
+                />
               </button>
               <button className="block w-full" onClick={showAbout}>
                 <I18Ntext str="menu.about" />

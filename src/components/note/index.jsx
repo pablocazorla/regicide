@@ -3,6 +3,7 @@ import Icon from "../icon";
 import clsx from "clsx";
 import I18Ntext from "@/i18n";
 import useNote from "./useNote";
+import ModeSilence from "../modeSilence";
 
 const Note = ({ className }) => {
   const {
@@ -13,6 +14,7 @@ const Note = ({ className }) => {
     disableButton,
     textButton,
     action,
+    showModeSilence,
     setDisableButton,
   } = useNote();
 
@@ -54,6 +56,7 @@ const Note = ({ className }) => {
                   </button>
                 </div>
               ) : null}
+              {showModeSilence ? <ModeSilence /> : null}
             </div>
           </div>
         </motion.div>
