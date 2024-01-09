@@ -38,6 +38,15 @@ const useHeader = () => {
     setAppStatus(1);
   }, [setAppStatus]);
 
+  const toggleFullScreen = useCallback(() => {
+    setShowMenu(false);
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }, []);
+
   return {
     modeSilence,
     toggleModeSilence,
@@ -46,6 +55,8 @@ const useHeader = () => {
     showHowToPlay,
     showAbout,
     exitGame,
+    isFullScreen,
+    toggleFullScreen,
   };
 };
 

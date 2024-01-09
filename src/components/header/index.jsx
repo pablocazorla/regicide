@@ -12,6 +12,8 @@ const Header = () => {
     showHowToPlay,
     showAbout,
     exitGame,
+    isFullScreen,
+    toggleFullScreen,
   } = useHeader();
   return (
     <>
@@ -44,6 +46,11 @@ const Header = () => {
               <button className="block w-full" onClick={toggleModeSilence}>
                 <I18Ntext
                   str={`menu.modeSilence.${modeSilence ? "quit" : "use"}`}
+                />
+              </button>
+              <button className="block w-full" onClick={toggleFullScreen}>
+                <I18Ntext
+                  str={`setFullScreen.${isFullScreen ? "Out" : "In"}`}
                 />
               </button>
               <button className="block w-full" onClick={showAbout}>
