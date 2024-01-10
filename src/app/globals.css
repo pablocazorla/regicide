@@ -20,3 +20,10 @@ body {
     box-shadow: none;
   }
 }
+
+.text-card-red {
+  color: #c53600;
+}
+.text-card-black {
+  color: #423c39;
+}

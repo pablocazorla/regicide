@@ -89,8 +89,8 @@ const Card = ({
           >
             <div
               className={clsx("text-center", {
-                "text-gray-800": !isRed,
-                "text-red-600": isRed,
+                "text-card-black": !isRed,
+                "text-card-red": isRed,
                 "pl-1 pt-3 w-9": size === "lg" || size === "md",
               })}
             >
@@ -124,8 +124,8 @@ const Card = ({
                 <div className="h-full grid place-content-center">
                   <div
                     className={clsx({
-                      "text-gray-800": !isRed,
-                      "text-red-600": isRed,
+                      "text-card-black": !isRed,
+                      "text-card-red": isRed,
                       "opacity-20": isFigure && size === "md",
                       "opacity-30":
                         !isFigure && size !== "md" && suit === enemySuit,
