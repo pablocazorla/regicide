@@ -7,6 +7,8 @@ const AppOptionContextProvider = ({ children }) => {
   const [appStatus, setAppStatus] = useState(0);
   const [visibleAbout, setVisibleAbout] = useState(false);
 
+  const [visibleRank, setVisibleRank] = useState(false);
+
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [jokersToWin, setJokersToWin] = useState(0);
 
@@ -69,6 +71,8 @@ const AppOptionContextProvider = ({ children }) => {
         setShowHowToPlay,
         orderedHand,
         toggleOrderedHand,
+        visibleRank,
+        setVisibleRank,
       }}
     >
       {children}

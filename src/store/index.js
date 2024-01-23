@@ -45,3 +45,10 @@ export const setOptions = (data) => {
   const oldData = STORAGE_GET(STORAGE_OPTIONS_NAME) || {};
   STORAGE_SET(STORAGE_OPTIONS_NAME, { ...oldData, ...data });
 };
+
+export const saveWinGame = (data) => {
+  const oldData = STORAGE_GET(STORAGE_OPTIONS_NAME) || {};
+  const winGames = oldData?.winGames || [];
+  winGames.push(data);
+  STORAGE_SET(STORAGE_OPTIONS_NAME, { ...oldData, winGames });
+};

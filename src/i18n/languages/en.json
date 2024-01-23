@@ -63,6 +63,7 @@
   "about.author.p.2": "This application has been created <strong>without profit</strong> and only to practice my skills as a developer, but if you like my work and want me to continue producing beautiful things, you can collaborate by <strong>\"buying me a coffee\"</strong>:",
   "menu.howToPlay": "How to play?",
   "menu.about": "About Regicide",
+  "menu.newGame": "New game",
   "menu.exit": "Exit game",
   "defense": "Shield",
   "modeSilence.use": "Use silent mode",
@@ -70,5 +71,11 @@
   "modeSilence.lead": "If you already know the game mechanics, you may want to play in <strong>silent mode</strong>.<br/><br/>In silent mode <strong>you will not see</strong> as many notifications about the actions that occur in the game, thus speeding up the flow of the game.<br/><br/>You can always remove silent mode from the <strong>application menu</strong>.",
   "menu.modeSilence.use": "Use silent mode",
   "menu.modeSilence.quit": "Remove silent mode",
-  "ordered.hand": "Keep your hand sorted by suit"
+  "ordered.hand": "Keep your hand sorted by suit",
+  "emptyHand": "<strong>You don't have enough cards left</strong>, you have to <strong>use a jester</strong>:",
+  "btn.rank": "See ranking of my games",
+  "title.rank": "Ranking of my games",
+  "rounds": "rounds",
+  "round": "round",
+  "noWin.text": "You haven't won any games yet."
 }

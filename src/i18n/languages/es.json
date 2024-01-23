@@ -63,12 +63,19 @@
   "about.author.p.2": "Esta aplicación ha sido creada <strong>sin ánimo de lucro</strong> y sólo para practicar mis habilidades como desarrollador, pero si te gusta mi trabajo y quieres que siga produciendo cosas hermosas, puedes colaborar <strong>\"comprándome un café\"</strong>:",
   "menu.howToPlay": "¿Cómo se juega?",
   "menu.about": "Acerca de Regicide",
-  "menu.exit": "Salir de la partida",
+  "menu.newGame": "Nueva partida",
+  "menu.exit": "Salir",
   "defense": "Defensa",
   "modeSilence.use": "Usar modo silencioso",
   "modeSilence.title": "Modo silencioso",
   "modeSilence.lead": "Si ya conoces bien la mecánica del juego, puede que quieras jugar en <strong>modo silencioso</strong>.<br/><br/>En el modo silencioso <strong>no veras</strong> tantas notificaciones sobre las acciones que ocurren en el juego, agilizando así el flujo de la partida.<br/><br/>Siempre podrás quitar el modo silencioso desde el <strong>menú de la aplicación</strong>.",
   "menu.modeSilence.use": "Usar modo silencioso",
   "menu.modeSilence.quit": "Quitar modo silencioso",
-  "ordered.hand": "Mantener la mano ordenada por palo"
+  "ordered.hand": "Mantener la mano ordenada por palo",
+  "emptyHand": "<strong>No te quedan cartas suficientes</strong> en tu mano; tienes que <strong>usar un comodín</strong>:",
+  "btn.rank": "Ver ranking de mis partidas",
+  "title.rank": "Ranking de mis partidas",
+  "rounds": "rondas",
+  "round": "ronda",
+  "noWin.text": "Todavía no has ganado ninguna partida."
 }

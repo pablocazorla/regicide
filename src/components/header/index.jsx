@@ -14,6 +14,8 @@ const Header = () => {
     exitGame,
     isFullScreen,
     toggleFullScreen,
+    setNewGame,
+    toggleVisibleRank,
   } = useHeader();
   return (
     <>
@@ -53,10 +55,16 @@ const Header = () => {
                   str={`setFullScreen.${isFullScreen ? "Out" : "In"}`}
                 />
               </button>
+              <button className="block w-full" onClick={toggleVisibleRank}>
+                <I18Ntext str="btn.rank" />
+              </button>
               <button className="block w-full" onClick={showAbout}>
                 <I18Ntext str="menu.about" />
               </button>
               <hr className="opacity-50" />
+              <button className="block w-full" onClick={setNewGame}>
+                <I18Ntext str="menu.newGame" />
+              </button>
               <button className="block w-full" onClick={exitGame}>
                 <I18Ntext str="menu.exit" />
               </button>

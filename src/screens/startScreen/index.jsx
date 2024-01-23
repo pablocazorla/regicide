@@ -18,6 +18,7 @@ const StartScreen = () => {
     isFullScreen,
     toggleFullScreen,
     setShowHowToPlay,
+    setVisibleRank,
   } = useStartScreen();
 
   return (
@@ -95,7 +96,19 @@ const StartScreen = () => {
               {loadingForNewGame && <Icon type="loading" />}
               <I18Ntext str="btn.newGame" />
             </button>
-            <div className="pt-4">
+
+            <div className="flex justify-center pt-3">
+              <button
+                className="bg-emerald-950/50 py-1 px-5 rounded-md shadow-sm text-xs"
+                onClick={() => {
+                  setVisibleRank(true);
+                }}
+              >
+                <I18Ntext str="btn.rank" />
+              </button>
+            </div>
+
+            <div>
               <button
                 className="underline text-xs"
                 onClick={() => {

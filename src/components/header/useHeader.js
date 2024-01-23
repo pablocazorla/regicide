@@ -3,8 +3,13 @@ import AppOptionContext from "@/contexts/appOptions/context";
 import GameContext from "@/contexts/game/context";
 
 const useHeader = () => {
-  const { setAppStatus, setVisibleAbout, isFullScreen, setShowHowToPlay } =
-    useContext(AppOptionContext);
+  const {
+    setAppStatus,
+    setVisibleAbout,
+    isFullScreen,
+    setShowHowToPlay,
+    setVisibleRank,
+  } = useContext(AppOptionContext);
 
   const { Game, update } = useContext(GameContext);
 
@@ -18,6 +23,11 @@ const useHeader = () => {
   const toggleModeSilence = useCallback(() => {
     setShowMenu(false);
     Game.toggleModeSilence();
+  }, [Game]);
+
+  const setNewGame = useCallback(() => {
+    setShowMenu(false);
+    Game.reset(true);
   }, [Game]);
 
   const toggleMenu = useCallback(() => {
@@ -47,6 +57,11 @@ const useHeader = () => {
     }
   }, []);
 
+  const toggleVisibleRank = useCallback(() => {
+    setShowMenu(false);
+    setVisibleRank(true);
+  }, [setVisibleRank]);
+
   return {
     modeSilence,
     toggleModeSilence,
@@ -57,6 +72,8 @@ const useHeader = () => {
     exitGame,
     isFullScreen,
     toggleFullScreen,
+    setNewGame,
+    toggleVisibleRank,
   };
 };
 

@@ -14,6 +14,8 @@ const AppOptionContext = createContext({
   setShowHowToPlay: () => {},
   orderedHand: false,
   toggleOrderedHand: () => {},
+  visibleRank: false,
+  setVisibleRank: () => {},
 });
 
 export default AppOptionContext;

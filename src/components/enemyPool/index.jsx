@@ -8,6 +8,8 @@ import { getValues } from "@/game/utils";
 const EnemyPool = () => {
   const {
     title,
+    subtitle,
+    roundNum,
     enemyList,
     enemyPool,
     enemyLife,
@@ -43,6 +45,9 @@ const EnemyPool = () => {
         </div>
         <div className="text-green-200 text-xs uppercase text-center pt-2 relative z-10">
           {title}
+          <div className="text-[10px] font-bold">
+            ({subtitle} {roundNum})
+          </div>
         </div>
       </div>
       <div className="py-1">

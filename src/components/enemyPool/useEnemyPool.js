@@ -11,6 +11,11 @@ const useEnemyPool = () => {
   const [attackPool, setAttackPool] = useState([]);
 
   const [enemySuit, setEnemySuit] = useState(null);
+  const [roundNum, setRoundNum] = useState(0);
+
+  useEffect(() => {
+    setRoundNum(Game.roundNum);
+  }, [Game, update.roundNum]);
 
   useEffect(() => {
     setEnemyPool(Game.enemyPool);
@@ -37,9 +42,12 @@ const useEnemyPool = () => {
   }, [enemyPool]);
 
   const title = <I18Ntext str={"currentEnemy"} />;
+  const subtitle = <I18Ntext str={"round"} />;
 
   return {
     title,
+    subtitle,
+    roundNum,
     enemyList,
     enemyPool,
     enemyLife,

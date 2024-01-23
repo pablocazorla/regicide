@@ -9,6 +9,7 @@ const useStartScreen = () => {
     setVisibleAbout,
     isFullScreen,
     setShowHowToPlay,
+    setVisibleRank,
   } = useContext(AppOptionContext);
 
   const [savedGame, setSavedGame] = useState(null);
@@ -61,6 +62,7 @@ const useStartScreen = () => {
     isFullScreen,
     toggleFullScreen,
     setShowHowToPlay,
+    setVisibleRank,
   };
 };
 

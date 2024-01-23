@@ -3,7 +3,8 @@ import { clearGame } from "@/store";
 import AppOptionContext from "@/contexts/appOptions/context";
 
 const useWinScreen = () => {
-  const { setAppStatus, jokersToWin } = useContext(AppOptionContext);
+  const { setAppStatus, jokersToWin, setVisibleRank } =
+    useContext(AppOptionContext);
 
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
@@ -32,7 +33,14 @@ const useWinScreen = () => {
     setAppStatus(1);
   }, [setAppStatus]);
 
-  return { width, height, onClickNewGame, backToMainScreen, jokersToWin };
+  return {
+    width,
+    height,
+    onClickNewGame,
+    backToMainScreen,
+    jokersToWin,
+    setVisibleRank,
+  };
 };
 
 export default useWinScreen;

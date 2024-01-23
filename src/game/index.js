@@ -1,4 +1,10 @@
-import { getSavedGame, saveGame, getOptions, setOptions } from "@/store";
+import {
+  getSavedGame,
+  saveGame,
+  getOptions,
+  setOptions,
+  saveWinGame,
+} from "@/store";
 import {
   baseDeck,
   statusTypes,
@@ -67,13 +73,14 @@ class GameClass {
     this.nextEnemyLife = 0;
     //
     this.modeSilence = false;
+    this.roundNum = 1;
   }
   toggleModeSilence() {
     this.modeSilence = !this.modeSilence;
     this.onUpdate(["modeSilence"]);
     setOptions({ modeSilence: this.modeSilence });
   }
-  reset() {
+  reset(forceNew) {
     const options = getOptions();
     if (options && typeof options.modeSilence !== "undefined") {
       this.modeSilence = options.modeSilence;
@@ -81,7 +88,7 @@ class GameClass {
     }
 
     const savedGame = getSavedGame();
-    if (savedGame) {
+    if (savedGame && !forceNew) {
       const {
         handPool,
         enemyLife,
@@ -90,6 +97,7 @@ class GameClass {
         deckPool,
         discardPool,
         jokers,
+        roundNum,
       } = savedGame;
       //
       this.handPool = handPool;
@@ -99,6 +107,7 @@ class GameClass {
       this.deckPool = deckPool;
       this.discardPool = discardPool;
       this.jokers = jokers;
+      this.roundNum = roundNum;
 
       this.status = statusTypes.PLAY_CARDS;
       if (!this.modeSilence) {
@@ -122,14 +131,23 @@ class GameClass {
 
       //
     } else {
+      this.roundNum = 1;
       this.deckPool = shuffle(baseDeck);
+      this.discardPool = [];
       this.enemyList = createENEMIES();
       this.enemyPool = [...this.enemyList];
 
       const currentEnemy = this.enemyPool[this.enemyPool.length - 1];
       this.enemySuit = getValues(currentEnemy)[1];
 
-      this.onUpdate(["deckPool", "enemyPool", "enemyList", "enemySuit"]);
+      this.onUpdate([
+        "roundNum",
+        "deckPool",
+        "discardPool",
+        "enemyPool",
+        "enemyList",
+        "enemySuit",
+      ]);
 
       afterPause(600, () => {
         const [newHand, newDeck] = pick(this.deckPool, 8);
@@ -144,7 +162,6 @@ class GameClass {
 
         this.onUpdate([
           "jokers",
-          "discardPool",
           "deckPool",
           "handPool",
           "getHandDisabled",
@@ -246,7 +263,19 @@ class GameClass {
               return init + n;
             }, 0);
 
-            if (valueTotal >= 10) {
+            const limitHand = (() => {
+              switch (firstCardValue) {
+                case 2:
+                case 4:
+                  return 8;
+                case 3:
+                  return 9;
+                default:
+                  return 10;
+              }
+            })();
+
+            if (valueTotal >= limitHand) {
               // If the combined cards value reach the limit.
               return disabledAllCardsInHand(this.handPool);
             } else {
@@ -674,6 +703,7 @@ class GameClass {
         afterPause(600, () => {
           if (!this.enemyPool.length) {
             // WIN
+            this.saveWinGame();
             afterPause(400, () => {
               this.setJokersToWin(this.jokers);
               this.setAppStatus(4);
@@ -683,8 +713,29 @@ class GameClass {
               // LOST ACTION
               this.setAppStatus(3);
             } else {
-              this.attackStepIndex += 1;
-              this.evaluateStepAttack();
+              if (this.handPool.length) {
+                this.attackStepIndex += 1;
+                this.evaluateStepAttack();
+              } else {
+                this.enabledButtonJokers = false;
+                //
+                this.note = {
+                  icon: "joker",
+                  text: "emptyHand",
+                  textButton: "useJoker",
+                  action: () => {
+                    this.onUseJoker();
+                    this.enabledButtonJokers = true;
+                    this.onUpdate(["enabledButtonJokers"]);
+                    afterPause(1300, () => {
+                      this.note = { text: null };
+                      this.attackStepIndex += 1;
+                      this.evaluateStepAttack();
+                    });
+                  },
+                };
+                this.onUpdate(["note", "enabledButtonJokers"]);
+              }
             }
           }
         });
@@ -693,13 +744,14 @@ class GameClass {
         break;
       case "SAVE_GAME":
         //
+        this.roundNum += 1;
         this.saveGameToStore();
         this.status = statusTypes.PLAY_CARDS;
         this.setHandDisabled();
         if (!this.modeSilence) {
           this.note = playCardsFromHandNote;
         }
-        this.onUpdate(["note", "handDisabled"]);
+        this.onUpdate(["roundNum", "note", "handDisabled"]);
         break;
       default:
       //
@@ -733,6 +785,7 @@ class GameClass {
       deckPool,
       discardPool,
       jokers,
+      roundNum,
     } = this;
 
     saveGame({
@@ -743,6 +796,7 @@ class GameClass {
       deckPool,
       discardPool,
       jokers,
+      roundNum,
     });
   }
   onUseJoker() {
@@ -786,6 +840,13 @@ class GameClass {
         this.saveGameToStore();
       });
     }
+  }
+  saveWinGame() {
+    const { jokers, roundNum } = this;
+    const d = new Date();
+    const date = d.getTime();
+
+    saveWinGame({ jokers, roundNum, date });
   }
 }
 
