@@ -1,7 +1,7 @@
 import { getOptions, setOptions } from "@/store";
 import { defaultLanguage } from "@/constants";
 import AppOptionContext from "./context";
-import { useMemo, useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 const AppOptionContextProvider = ({ children }) => {
   const [appStatus, setAppStatus] = useState(0);
